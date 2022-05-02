@@ -23,7 +23,7 @@ public class ToySpawner : MonoBehaviour
 
     private void InstantiateToy()
     {
-        Debug.Log("NEW TOY");
+        //Debug.Log("NEW TOY");
         int enemyIndex = Random.Range(0, toysPrefabs.Length);
         Instantiate(toysPrefabs[enemyIndex], transform);
     }
