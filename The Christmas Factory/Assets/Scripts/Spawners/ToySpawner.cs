@@ -8,24 +8,62 @@ public class ToySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] toysPrefabs;
 
-    [SerializeField]
-    [Range(0, 20)]
-    private float spawnerInitialDelay = 0f;
+    [SerializeField] private bool canSpawn = true;
+    public bool CanSpawn { get { return canSpawn; } set { canSpawn = value; } }
 
     [SerializeField]
     [Range(0, 20)]
-    private float spawnerRepeatRate = 0.5f;
+    private float spawnDelay = 2f;
 
-    void Start()
+    [SerializeField]
+    private int toyCapacity = 0;
+
+    [SerializeField]
+    private GameObject[] toyPoll;
+
+    private void Awake()
     {
-        InvokeRepeating("InstantiateToy", spawnerInitialDelay, spawnerRepeatRate);
+        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x;
+        PopulatePool();
     }
 
-    private void InstantiateToy()
+    private void Start()
     {
-        //Debug.Log("NEW TOY");
-        int enemyIndex = Random.Range(0, toysPrefabs.Length);
-        Instantiate(toysPrefabs[enemyIndex], transform);
+        StartCoroutine(SpawnToys());
+    }
+
+    private void PopulatePool()
+    {
+        toyPoll = new GameObject[toyCapacity];
+        for (int i = 0; i < toyPoll.Length; i++)
+        {
+            int enemyIndex = Random.Range(0, toysPrefabs.Length);
+            toyPoll[i] = Instantiate(toysPrefabs[enemyIndex], transform);
+            toyPoll[i].SetActive(false);
+        }
+    }
+
+    private void EnableObjectInPool()
+    {
+        for (int i = 0; i < toyPoll.Length; i++)
+        {
+            GameObject toy = toyPoll[i];
+            if (!toy.activeSelf)
+            {
+                toy.SetActive(true);
+                return;
+            }
+        }
+
+    }
+
+    private IEnumerator SpawnToys()
+    {
+        while (CanSpawn)
+        {
+            EnableObjectInPool();
+            yield return new WaitForSeconds(spawnDelay);
+        }
     }
 
 }

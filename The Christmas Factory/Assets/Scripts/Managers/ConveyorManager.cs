@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndpointManager : MonoBehaviour
+public class ConveyorManager : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Toys"))
-        {
-            Debug.Log("TOY IN AREA");
-            other.gameObject.GetComponent<ToyMovement>().CanMove = false;
-        }
-
         if (other.CompareTag("Player"))
         {
-            Debug.Log("PLAYER IN AREA");
-            other.GetComponent<ElfActionsManager>().MyEndpoint = this;
+            Debug.Log("PLAYER IN CONVEYOR");
+            other.GetComponent<ElfActionsManager>().MyConveyor = this;
         }
     }
 
@@ -24,9 +17,9 @@ public class EndpointManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("PLAYER OUT AREA");
+            Debug.Log("PLAYER OUT CONVEYOR");
             ElfActionsManager elfActionsManager = other.GetComponent<ElfActionsManager>();
-            elfActionsManager.MyEndpoint = null;
+            elfActionsManager.MyConveyor = null;
             elfActionsManager.NextToy = null;
         }
 

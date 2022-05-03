@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ElfActionsManager : MonoBehaviour
 {
-    [SerializeField] private EndpointManager myEndpoint = null;
-    public EndpointManager MyEndpoint { get { return myEndpoint; } set { myEndpoint = value; } }
+    [SerializeField] private ConveyorManager myConveyor = null;
+    public ConveyorManager MyConveyor { get { return myConveyor; } set { myConveyor = value; } }
 
     [SerializeField] private ElfActionsManager myInterlocutor = null;
     public ElfActionsManager MyInterlocutor { get { return myInterlocutor; } set { myInterlocutor = value; } }
@@ -24,7 +24,7 @@ public class ElfActionsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("WRAP TOY");
-            Destroy(nextToy);
+            nextToy.SetActive(false);
             nextToy = null;
         }
     }

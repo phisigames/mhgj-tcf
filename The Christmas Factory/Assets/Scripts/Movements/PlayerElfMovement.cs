@@ -12,7 +12,6 @@ public class PlayerElfMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveElf();

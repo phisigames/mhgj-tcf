@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7418625001855137396}
   - component: {fileID: 1772687074264827183}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af4de7239ad0bd4ebb92caab352d616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myEndpoint: {fileID: 0}
+  myConveyor: {fileID: 0}
   myInterlocutor: {fileID: 0}
   nextToy: {fileID: 0}
 --- !u!114 &4340055799802438071
@@ -198,3 +198,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551d709e4f3842145b7c9bfd9ad04fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myActionsManager: {fileID: 0}
