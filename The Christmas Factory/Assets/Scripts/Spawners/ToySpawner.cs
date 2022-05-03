@@ -16,6 +16,10 @@ public class ToySpawner : MonoBehaviour
     private float spawnDelay = 2f;
 
     [SerializeField]
+    [Range(0, 5)]
+    private int toyAdvantage = 1;
+
+    [SerializeField]
     private int toyCapacity = 0;
 
     [SerializeField]
@@ -23,7 +27,7 @@ public class ToySpawner : MonoBehaviour
 
     private void Awake()
     {
-        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x;
+        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x - toyAdvantage;
         PopulatePool();
     }
 
