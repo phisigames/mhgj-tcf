@@ -12,17 +12,24 @@ public class EndpointCollisions : MonoBehaviour
     [Range(0.1f, 5f)]
     private float minPosition = 1;
 
+    [SerializeField]
+    private Vector3 initialPosition;
+
+    private void Start()
+    {
+        initialPosition = transform.localPosition;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Toys"))
         {
-            Debug.Log("TOY IN ENDPOINT");
             other.gameObject.GetComponent<ToyMovement>().CanMove = false;
-            Debug.Log(transform.localPosition.x);
             if (transform.localPosition.x > minPosition)
             {
                 transform.localPosition = new Vector3((transform.localPosition.x - endpointGap), transform.position.y, transform.position.z);
             }
         }
     }
+
 }

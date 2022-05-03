@@ -12,8 +12,14 @@ public class ToyMovement : MonoBehaviour
     [SerializeField] private bool canMove = true;
     public bool CanMove { get { return canMove; } set { canMove = value; } }
 
+    [SerializeField]
+    private Vector3 initialPosition;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        initialPosition = transform.position;
+    }
+
     void Update()
     {
         MoveToy();
@@ -23,5 +29,11 @@ public class ToyMovement : MonoBehaviour
     {
         if (!canMove) { return; }
         transform.Translate(Vector3.right * toySpeed * Time.deltaTime);
+    }
+
+    private void OnDisable()
+    {
+        transform.position = initialPosition;
+        canMove = true;
     }
 }

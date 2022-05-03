@@ -7,11 +7,6 @@ public class PlayerElfMovement : MonoBehaviour
     [Range(5, 50)]
     private float elfSpeed = 5;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         MoveElf();

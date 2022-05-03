@@ -17,9 +17,16 @@ public class ElfCollisions : MonoBehaviour
         {
             if (myActionsManager.NextToy == null)
             {
-                Debug.Log("PLAYER CAN WRAP");
                 myActionsManager.NextToy = other.gameObject;
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Toys"))
+        {
+            myActionsManager.NextToy = null;
         }
     }
 }

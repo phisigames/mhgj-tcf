@@ -8,8 +8,10 @@ public class ToySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] toysPrefabs;
 
-    [SerializeField] private bool canSpawn = true;
-    public bool CanSpawn { get { return canSpawn; } set { canSpawn = value; } }
+    [SerializeField]
+    private ConveyorManager myConveyor;
+
+    [SerializeField] private bool canSpawn;
 
     [SerializeField]
     [Range(0, 20)]
@@ -28,11 +30,13 @@ public class ToySpawner : MonoBehaviour
     private void Awake()
     {
         toyCapacity = (int)GetComponent<BoxCollider2D>().size.x - toyAdvantage;
+        myConveyor = GetComponent<ConveyorManager>();
         PopulatePool();
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        canSpawn = true;
         StartCoroutine(SpawnToys());
     }
 
@@ -63,11 +67,20 @@ public class ToySpawner : MonoBehaviour
 
     private IEnumerator SpawnToys()
     {
-        while (CanSpawn)
+        while (canSpawn)
         {
             EnableObjectInPool();
             yield return new WaitForSeconds(spawnDelay);
+            IsConveyorFull();
         }
     }
 
+    private void IsConveyorFull()
+    {
+        if (myConveyor.ConveyorCapacity == myConveyor.ConveyorMaxCapacity)
+        {
+            canSpawn = false;
+            this.enabled = false;
+        }
+    }
 }
