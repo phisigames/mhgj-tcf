@@ -18,11 +18,8 @@ public class ToySpawner : MonoBehaviour
     private float spawnDelay = 2f;
 
     [SerializeField]
-    [Range(0, 5)]
-    private int toyAdvantage = 1;
-
-    [SerializeField]
-    private int toyCapacity = 0;
+    [Range(3, 20)]
+    private int toyCapacity = 5;
     public int ToyCapacity { get { return toyCapacity; } }
 
     [SerializeField]
@@ -30,7 +27,6 @@ public class ToySpawner : MonoBehaviour
 
     private void Awake()
     {
-        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x;
         myConveyor = GetComponent<ConveyorManager>();
         PopulatePool();
     }
@@ -43,7 +39,7 @@ public class ToySpawner : MonoBehaviour
 
     private void PopulatePool()
     {
-        toyPoll = new GameObject[toyCapacity + toyAdvantage];
+        toyPoll = new GameObject[toyCapacity];
         for (int i = 0; i < toyPoll.Length; i++)
         {
             int enemyIndex = Random.Range(0, toysPrefabs.Length);
@@ -70,8 +66,8 @@ public class ToySpawner : MonoBehaviour
     {
         while (canSpawn)
         {
-            EnableObjectInPool();
             yield return new WaitForSeconds(spawnDelay);
+            EnableObjectInPool();
             IsConveyorFull();
         }
     }
