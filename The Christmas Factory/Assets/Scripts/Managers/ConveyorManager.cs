@@ -17,6 +17,9 @@ public class ConveyorManager : MonoBehaviour
     [SerializeField]
     private ToySpawner myToySpawner;
 
+    [SerializeField]
+    private EndpointCollisions myEnpoint;
+
     private void Awake()
     {
         myToySpawner = GetComponent<ToySpawner>();
@@ -32,6 +35,7 @@ public class ConveyorManager : MonoBehaviour
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity++;
+            //RepositionToys();
         }
     }
 
@@ -45,6 +49,7 @@ public class ConveyorManager : MonoBehaviour
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity--;
+            RepositionToys();
             EnableToySpawner();
         }
     }
@@ -58,4 +63,19 @@ public class ConveyorManager : MonoBehaviour
         }
     }
 
+    private ToyMovement[] GetToysInConveyor()
+    {
+        return GetComponentsInChildren<ToyMovement>();
+    }
+
+    public void RepositionToys()
+    {
+        ToyMovement[] myToys = GetToysInConveyor();
+        for (int i = 0; i < myToys.Length; i++)
+        {
+            myToys[i].CanMove = false;
+            myToys[i].transform.localPosition = new Vector3(myToySpawner.ToyCapacity - i, myToys[i].transform.localPosition.y, myToys[i].transform.localPosition.z);
+        }
+        myEnpoint.transform.localPosition = new Vector3(myToySpawner.ToyCapacity - myToys.Length, myEnpoint.transform.localPosition.y, myEnpoint.transform.localPosition.z);
+    }
 }

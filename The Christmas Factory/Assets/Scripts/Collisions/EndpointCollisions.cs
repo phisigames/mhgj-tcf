@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EndpointCollisions : MonoBehaviour
 {
+
     [SerializeField]
-    [Range(0.1f, 5f)]
-    private float endpointGap = 1.2f;
+    private int endpointGap = 1;
+    public int EndpointGap { get { return endpointGap; } }
 
     [SerializeField]
     [Range(0.1f, 5f)]
@@ -25,9 +26,10 @@ public class EndpointCollisions : MonoBehaviour
         if (other.CompareTag("Toys"))
         {
             other.gameObject.GetComponent<ToyMovement>().CanMove = false;
+            other.gameObject.transform.localPosition = new Vector3(transform.localPosition.x - endpointGap/2, transform.position.y, transform.position.z);
             if (transform.localPosition.x > minPosition)
             {
-                transform.localPosition = new Vector3((transform.localPosition.x - endpointGap), transform.position.y, transform.position.z);
+                transform.localPosition = new Vector3(transform.localPosition.x - endpointGap, transform.position.y, transform.position.z);
             }
         }
     }

@@ -23,7 +23,15 @@ public class ElfActionsManager : MonoBehaviour
         if (nextToy == null) { return; }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("WRAP TOY");
+            Debug.Log("WRAPPING TOY");
+            Invoke("WrapSequence", 0.1f);
+        }
+    }
+
+    private void WrapSequence()
+    {
+        if (nextToy.activeSelf)
+        {
             nextToy.SetActive(false);
             nextToy = null;
         }

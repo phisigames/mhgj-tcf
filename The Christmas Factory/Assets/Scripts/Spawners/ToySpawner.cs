@@ -23,13 +23,14 @@ public class ToySpawner : MonoBehaviour
 
     [SerializeField]
     private int toyCapacity = 0;
+    public int ToyCapacity { get { return toyCapacity; } }
 
     [SerializeField]
     private GameObject[] toyPoll;
 
     private void Awake()
     {
-        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x - toyAdvantage;
+        toyCapacity = (int)GetComponent<BoxCollider2D>().size.x;
         myConveyor = GetComponent<ConveyorManager>();
         PopulatePool();
     }
@@ -42,7 +43,7 @@ public class ToySpawner : MonoBehaviour
 
     private void PopulatePool()
     {
-        toyPoll = new GameObject[toyCapacity];
+        toyPoll = new GameObject[toyCapacity + toyAdvantage];
         for (int i = 0; i < toyPoll.Length; i++)
         {
             int enemyIndex = Random.Range(0, toysPrefabs.Length);

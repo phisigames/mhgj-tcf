@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conveyorMaxCapacity: 3
   conveyorCapacity: 0
+  myToySpawner: {fileID: 0}
+  myEnpoint: {fileID: 2820759417370127956}
 --- !u!114 &1954170234837830536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7900639553002812278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0.1, z: 0}
+  m_LocalPosition: {x: 6.5, y: 0.1, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []

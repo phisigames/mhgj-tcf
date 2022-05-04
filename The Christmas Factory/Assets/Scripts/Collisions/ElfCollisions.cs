@@ -13,13 +13,8 @@ public class ElfCollisions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Toys"))
-        {
-            if (myActionsManager.NextToy == null)
-            {
-                myActionsManager.NextToy = other.gameObject;
-            }
-        }
+        if (myActionsManager.NextToy != null) { return; }
+        AddToyReference(other);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -27,6 +22,23 @@ public class ElfCollisions : MonoBehaviour
         if (other.CompareTag("Toys"))
         {
             myActionsManager.NextToy = null;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (myActionsManager.NextToy != null) { return; }
+        AddToyReference(other);
+    }
+
+    private void AddToyReference(Collider2D other)
+    {
+        if (other.CompareTag("Toys"))
+        {
+            if (myActionsManager.NextToy == null)
+            {
+                myActionsManager.NextToy = other.gameObject;
+            }
         }
     }
 }
