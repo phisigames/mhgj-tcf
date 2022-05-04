@@ -73,7 +73,7 @@ SurfaceEffector2D:
     serializedVersion: 2
     m_Bits: 128
   m_Speed: 1
-  m_SpeedVariation: 10
+  m_SpeedVariation: 5
   m_ForceScale: 0.1
   m_UseContactForce: 0
   m_UseFriction: 1
