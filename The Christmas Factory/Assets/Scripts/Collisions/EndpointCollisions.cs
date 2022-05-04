@@ -9,7 +9,7 @@ public class EndpointCollisions : MonoBehaviour
     {
         if (other.CompareTag("Toys"))
         {
-           other.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
         }
     }
 

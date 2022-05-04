@@ -214,10 +214,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1954170234837830536, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
-      propertyPath: spawnDelay
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830646, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_Name
       value: Conveyor Terminal
@@ -267,8 +263,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
-      propertyPath: myEnpoint
-      value: 
+      propertyPath: conveyorMaxCapacity
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}

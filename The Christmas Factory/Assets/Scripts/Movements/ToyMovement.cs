@@ -7,6 +7,7 @@ public class ToyMovement : MonoBehaviour
 {
     [SerializeField]
     private Vector3 initialPosition;
+    
 
     private void Awake()
     {
@@ -14,6 +15,11 @@ public class ToyMovement : MonoBehaviour
     }
 
     private void OnDisable()
+    {
+        ResetToy();
+    }
+
+    public void ResetToy()
     {
         transform.position = initialPosition;
         transform.rotation = Quaternion.identity;

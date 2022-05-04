@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6526854631138288384}
   - component: {fileID: 1954170234837830536}
   - component: {fileID: 337016591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Conveyor Terminal
-  m_TagString: Untagged
+  m_TagString: ConveyorTerminal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4, y: 0}
+  m_Offset: {x: 4.5, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -61,7 +61,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 1}
+  m_Size: {x: 12, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &6526854631138288384
 MonoBehaviour:
@@ -94,9 +94,9 @@ MonoBehaviour:
   - {fileID: 1215329982072959481, guid: cb2b6f714f9b7fb47a81855f8642e71a, type: 3}
   myConveyor: {fileID: 0}
   canSpawn: 1
-  spawnDelay: 3
+  spawnDelay: 1
   toyAdvantage: 1
-  toyCapacity: 0
+  toyCapacity: 6
   toyPoll: []
 --- !u!50 &337016591
 Rigidbody2D:

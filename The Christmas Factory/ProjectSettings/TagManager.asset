@@ -7,6 +7,8 @@ TagManager:
   - Toys
   - Conveyors
   - Endpoints
+  - ConveyorTerminal
+  - ToyControls
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Conveyors
   - Toys
   - Endpoints
-  - 
+  - ConveyorTerminal
   - 
   - 
   - 
