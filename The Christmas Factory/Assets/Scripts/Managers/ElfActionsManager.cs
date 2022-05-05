@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ElfActionsManager : MonoBehaviour
 {
+    [SerializeField] private Elf elfData = null;
+    public Elf ElfData { get { return elfData; } }
+
     [SerializeField] private ConveyorManager myConveyor = null;
     public ConveyorManager MyConveyor { get { return myConveyor; } set { myConveyor = value; } }
 
@@ -24,6 +27,14 @@ public class ElfActionsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("WRAPPING TOY");
+            ElfData.GiftWrapping++;
+            if (ElfData.isLimitToWrap())
+            {
+                ElfData.GiftWrapping = 0;
+                StressManager.Instance.CumulativeStress++;
+                //REMPLACE WITH EVENT SOLUTION
+                FindObjectOfType<HUD>().UpdateStressBar();
+            }
             Invoke("WrapSequence", 0.1f);
         }
     }

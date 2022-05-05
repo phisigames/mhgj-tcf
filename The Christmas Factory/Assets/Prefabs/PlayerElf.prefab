@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5636188415155848675}
   - component: {fileID: 7953993187289265840}
   - component: {fileID: 8728967160151416917}
+  - component: {fileID: 4267814321855832728}
   - component: {fileID: 4283592990916492814}
   - component: {fileID: 1891499248967173775}
   - component: {fileID: 4340055799802438071}
@@ -158,6 +159,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4267814321855832728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636188415155848673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e29312a51996048be5ea986930c82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resistenceToWrap: 3
+  giftWrapping: 0
 --- !u!114 &4283592990916492814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af4de7239ad0bd4ebb92caab352d616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elfData: {fileID: 4267814321855832728}
   myConveyor: {fileID: 0}
   myInterlocutor: {fileID: 0}
   nextToy: {fileID: 0}

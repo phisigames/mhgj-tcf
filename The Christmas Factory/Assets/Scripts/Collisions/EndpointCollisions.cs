@@ -9,6 +9,9 @@ public class EndpointCollisions : MonoBehaviour
     {
         if (other.CompareTag("Toys"))
         {
+            StressManager.Instance.CumulativeStress++;
+            //REMPLACE WITH EVENT SOLUTION
+            FindObjectOfType<HUD>().UpdateStressBar();
             other.gameObject.SetActive(false);
         }
     }
