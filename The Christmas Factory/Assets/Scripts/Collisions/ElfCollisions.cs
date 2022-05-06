@@ -13,8 +13,15 @@ public class ElfCollisions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (myActionsManager.NextToy != null) { return; }
-        AddToyReference(other);
+        if (other.CompareTag("ToyControls"))
+        {
+            myActionsManager.NextToy = other.transform.parent.gameObject;
+        }
+
+        if (other.CompareTag("TalkControls"))
+        {
+            myActionsManager.MyInterlocutor = other.transform.parent.GetComponent<Elf>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -23,22 +30,10 @@ public class ElfCollisions : MonoBehaviour
         {
             myActionsManager.NextToy = null;
         }
-    }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (myActionsManager.NextToy != null) { return; }
-        AddToyReference(other);
-    }
-
-    private void AddToyReference(Collider2D other)
-    {
-        if (other.CompareTag("ToyControls"))
+        if (other.CompareTag("TalkControls"))
         {
-            if (myActionsManager.NextToy == null)
-            {
-                myActionsManager.NextToy = other.transform.parent.gameObject;
-            }
+            myActionsManager.MyInterlocutor = null;
         }
     }
 }

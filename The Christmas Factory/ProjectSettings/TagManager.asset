@@ -9,6 +9,8 @@ TagManager:
   - Endpoints
   - ConveyorTerminal
   - ToyControls
+  - Elfs
+  - TalkControls
   layers:
   - Default
   - TransparentFX

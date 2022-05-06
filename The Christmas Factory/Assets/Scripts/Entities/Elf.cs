@@ -9,13 +9,34 @@ public class Elf : MonoBehaviour
     [Range(1, 10)]
     private int resistenceToWrap = 3;
     public int ResistenceToWrap { get { return resistenceToWrap; } set { resistenceToWrap = value; } }
+
+    [SerializeField]
+    [Range(1, 10)]
+    private int resistenceToTalk = 3;
+    public int ResistenceToTalk { get { return resistenceToTalk; } set { resistenceToTalk = value; } }
+
     //RUNTIME DATA
     [SerializeField]
     private int giftWrapping = 0;
     public int GiftWrapping { get { return giftWrapping; } set { giftWrapping = value; } }
 
+    //RUNTIME DATA
+    [SerializeField]
+    private int talkTime = 0;
+    public int TalkTime { get { return talkTime; } set { talkTime = value; } }
+
     public bool isLimitToWrap()
     {
         return giftWrapping == resistenceToWrap;
+    }
+
+    public bool isLimitToTalk()
+    {
+        return talkTime == resistenceToTalk;
+    }
+
+    public bool canTalk()
+    {
+        return talkTime == 0;
     }
 }

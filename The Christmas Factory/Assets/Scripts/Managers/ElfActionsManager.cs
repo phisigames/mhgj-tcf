@@ -10,8 +10,8 @@ public class ElfActionsManager : MonoBehaviour
     [SerializeField] private ConveyorManager myConveyor = null;
     public ConveyorManager MyConveyor { get { return myConveyor; } set { myConveyor = value; } }
 
-    [SerializeField] private ElfActionsManager myInterlocutor = null;
-    public ElfActionsManager MyInterlocutor { get { return myInterlocutor; } set { myInterlocutor = value; } }
+    [SerializeField] private Elf myInterlocutor = null;
+    public Elf MyInterlocutor { get { return myInterlocutor; } set { myInterlocutor = value; } }
 
     [SerializeField] private GameObject nextToy = null;
     public GameObject NextToy { get { return nextToy; } set { nextToy = value; } }
@@ -19,6 +19,7 @@ public class ElfActionsManager : MonoBehaviour
     void Update()
     {
         ToyWrapping();
+        Talk();
     }
 
     private void ToyWrapping()
@@ -39,6 +40,20 @@ public class ElfActionsManager : MonoBehaviour
         }
     }
 
+    private void Talk()
+    {
+        if (myInterlocutor == null) { return; }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("TALK");
+            if (ElfData.canTalk())
+            {
+                Debug.Log("TALKING TO ELF");
+                StartCoroutine(TalkSequence());
+            }
+        }
+    }
+
     private void WrapSequence()
     {
         if (nextToy.activeSelf)
@@ -46,5 +61,18 @@ public class ElfActionsManager : MonoBehaviour
             nextToy.SetActive(false);
             nextToy = null;
         }
+    }
+
+    private IEnumerator TalkSequence()
+    {   //ACA EFECTOS DE CHARLA
+        for (int i = 0; i < ElfData.ResistenceToTalk; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            ElfData.TalkTime++;
+            Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
+        }
+        ElfData.TalkTime = 0;
+        //REMPLACE WITH EVENT SOLUTION
+        FindObjectOfType<HUD>().UpdateStressBar();
     }
 }
