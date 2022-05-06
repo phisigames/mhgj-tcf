@@ -72,6 +72,8 @@ public class ElfActionsManager : MonoBehaviour
             Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
         }
         ElfData.TalkTime = 0;
+        Debug.Log("RESET TALK");
+        StressManager.Instance.CumulativeStress--;
         //REMPLACE WITH EVENT SOLUTION
         FindObjectOfType<HUD>().UpdateStressBar();
     }
