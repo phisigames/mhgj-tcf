@@ -22,6 +22,11 @@ public class ElfCollisions : MonoBehaviour
         {
             myActionsManager.MyInterlocutor = other.transform.parent.GetComponent<Elf>();
         }
+
+        if (other.CompareTag("VendingMachines"))
+        {
+            myActionsManager.MyVendingMachine = other.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -34,6 +39,11 @@ public class ElfCollisions : MonoBehaviour
         if (other.CompareTag("TalkControls"))
         {
             myActionsManager.MyInterlocutor = null;
+        }
+
+        if (other.CompareTag("VendingMachines"))
+        {
+            myActionsManager.MyVendingMachine = null;
         }
     }
 }

@@ -16,10 +16,14 @@ public class ElfActionsManager : MonoBehaviour
     [SerializeField] private GameObject nextToy = null;
     public GameObject NextToy { get { return nextToy; } set { nextToy = value; } }
 
+    [SerializeField] private GameObject myVendingMachine = null;
+    public GameObject MyVendingMachine { get { return myVendingMachine; } set { myVendingMachine = value; } }
+
     void Update()
     {
         ToyWrapping();
         Talk();
+        HavingCoffee();
     }
 
     private void ToyWrapping()
@@ -54,6 +58,16 @@ public class ElfActionsManager : MonoBehaviour
         }
     }
 
+    private void HavingCoffee()
+    {
+        if (myVendingMachine == null) { return; }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("DRINKING COFFEE");
+            StartCoroutine(CoffeeSequence());
+        }
+    }
+
     private void WrapSequence()
     {
         if (nextToy.activeSelf)
@@ -75,6 +89,14 @@ public class ElfActionsManager : MonoBehaviour
         Debug.Log("RESET TALK");
         StressManager.Instance.CumulativeStress--;
         //REMPLACE WITH EVENT SOLUTION
+        FindObjectOfType<HUD>().UpdateStressBar();
+    }
+
+    private IEnumerator CoffeeSequence()
+    {
+        yield return new WaitForSeconds(1f);
+        StressManager.Instance.CumulativeStress--;
+        myVendingMachine = null;
         FindObjectOfType<HUD>().UpdateStressBar();
     }
 }
