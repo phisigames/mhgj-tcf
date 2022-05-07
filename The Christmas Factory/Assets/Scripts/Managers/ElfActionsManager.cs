@@ -19,6 +19,10 @@ public class ElfActionsManager : MonoBehaviour
     [SerializeField] private GameObject myVendingMachine = null;
     public GameObject MyVendingMachine { get { return myVendingMachine; } set { myVendingMachine = value; } }
 
+    [SerializeField] private CalloutManager myCalloutManager = null;
+    public CalloutManager MyCalloutManager { get { return myCalloutManager; }}
+
+
     void Update()
     {
         ToyWrapping();
@@ -32,6 +36,8 @@ public class ElfActionsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("WRAPPING TOY");
+            myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
+            myCalloutManager.EnableCallout(true);
             ElfData.GiftWrapping++;
             if (ElfData.isLimitToWrap())
             {
@@ -40,7 +46,7 @@ public class ElfActionsManager : MonoBehaviour
                 //REMPLACE WITH EVENT SOLUTION
                 FindObjectOfType<HUD>().UpdateStressBar();
             }
-            Invoke("WrapSequence", 0.1f);
+            Invoke("WrapSequence", 0.5f);
         }
     }
 
@@ -70,6 +76,7 @@ public class ElfActionsManager : MonoBehaviour
 
     private void WrapSequence()
     {
+        myCalloutManager.EnableCallout(false);
         if (nextToy.activeSelf)
         {
             nextToy.SetActive(false);
@@ -78,7 +85,10 @@ public class ElfActionsManager : MonoBehaviour
     }
 
     private IEnumerator TalkSequence()
-    {   //ACA EFECTOS DE CHARLA
+    {   
+        myCalloutManager.SetCalloutSprite(CalloutTypes.Talk);
+        myCalloutManager.EnableCallout(true);
+        //ACA EFECTOS DE CHARLA
         for (int i = 0; i < ElfData.ResistenceToTalk; i++)
         {
             yield return new WaitForSeconds(1f);
@@ -87,6 +97,7 @@ public class ElfActionsManager : MonoBehaviour
         }
         ElfData.TalkTime = 0;
         Debug.Log("RESET TALK");
+        myCalloutManager.EnableCallout(false);
         StressManager.Instance.CumulativeStress--;
         //REMPLACE WITH EVENT SOLUTION
         FindObjectOfType<HUD>().UpdateStressBar();
@@ -94,9 +105,13 @@ public class ElfActionsManager : MonoBehaviour
 
     private IEnumerator CoffeeSequence()
     {
+        myCalloutManager.SetCalloutSprite(CalloutTypes.Coffee);
+        myCalloutManager.EnableCallout(true);
         yield return new WaitForSeconds(1f);
         StressManager.Instance.CumulativeStress--;
         myVendingMachine = null;
+        myCalloutManager.EnableCallout(false);
+        //REMPLACE WITH EVENT SOLUTION
         FindObjectOfType<HUD>().UpdateStressBar();
     }
 }

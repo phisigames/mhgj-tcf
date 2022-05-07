@@ -10,6 +10,10 @@ public class SupervisorIA : MonoBehaviour
     [Range(0f, 5f)]
     private float speed = 1f;
 
+    
+    [SerializeField] private CalloutManager myCalloutManager = null;
+    public CalloutManager MyCalloutManager { get { return myCalloutManager; }}
+
     void Start()
     {
         StartCoroutine(FollowPath());
@@ -34,17 +38,21 @@ public class SupervisorIA : MonoBehaviour
                 if (rngRequest())
                 {
                     Debug.Log("GOOD ORDER");
+                    myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+                    myCalloutManager.EnableCallout(true);
                     StressManager.Instance.CumulativeStress--;
                 }
                 else
                 {
+                    myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+                    myCalloutManager.EnableCallout(true);
                     StressManager.Instance.CumulativeStress++;
                     Debug.Log("BAD ORDER");
                 }
                 //REMPLACE WITH EVENT SOLUTION
                 FindObjectOfType<HUD>().UpdateStressBar();
                 yield return new WaitForSeconds(1f);
-
+                myCalloutManager.EnableCallout(false);
             }
             yield return new WaitForSeconds(2f);
         }
