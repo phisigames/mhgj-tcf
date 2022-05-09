@@ -12,6 +12,7 @@ public class EndpointCollisions : MonoBehaviour
             StressManager.Instance.CumulativeStress++;
             //REMPLACE WITH EVENT SOLUTION
             FindObjectOfType<HUD>().UpdateStressBar();
+            AudioManager.Instance.DecreasePitch();
             other.gameObject.SetActive(false);
         }
     }
