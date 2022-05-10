@@ -10,9 +10,24 @@ public class SupervisorIA : MonoBehaviour
     [Range(0f, 5f)]
     private float speed = 1f;
 
-    
-    [SerializeField] private CalloutManager myCalloutManager = null;
-    public CalloutManager MyCalloutManager { get { return myCalloutManager; }}
+    [SerializeField] 
+    private CalloutManager myCalloutManager = null;
+    public CalloutManager MyCalloutManager { get { return myCalloutManager; } }
+
+    [SerializeField]
+    [Range(10, 90)]
+    private int goodOrdenProbability = 50;
+    public int GoodOrdenProbability { get { return goodOrdenProbability; } set { goodOrdenProbability = value; } }
+
+    [SerializeField]
+    [Range(0.1f, 5f)]
+    private float delayBetweenOrders = 1f;
+    public float DelayBetweenOrders { get { return delayBetweenOrders; } set { delayBetweenOrders = value; } }
+
+    [SerializeField]
+    [Range(0.5f, 10f)]
+    private float delayBetweenRounds = 2f;
+    public float DelayBetweenRounds { get { return delayBetweenRounds; } set { delayBetweenRounds = value; } }
 
     void Start()
     {
@@ -23,45 +38,59 @@ public class SupervisorIA : MonoBehaviour
     {
         while (true)
         {
-            foreach (GameObject waypoint in path)
+            for (int i = 0; i < path.Count; i++)
             {
                 Vector3 startPosition = transform.position;
-                Vector3 endPosition = waypoint.transform.position;
+                Vector3 endPosition = path[i].transform.position;
                 float travelPercent = 0f;
-                //transform.LookAt(endPosition);
                 while (travelPercent < 1f)
                 {
                     travelPercent += Time.deltaTime * speed;
                     transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                     yield return new WaitForEndOfFrame();
                 }
-                if (rngRequest())
+
+                if ((i + 1) < path.Count)
                 {
-                    Debug.Log("GOOD ORDER");
-                    myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
-                    myCalloutManager.EnableCallout(true);
-                    StressManager.Instance.CumulativeStress--;
+                    if (rngRequest())
+                    {
+                        Debug.Log("GOOD ORDER");
+                        CalloutOrder(true);
+                    }
+                    else
+                    {
+                        Debug.Log("BAD ORDER");
+                        CalloutOrder(false);
+                    }
+                    //REMPLACE WITH EVENT SOLUTION
+                    FindObjectOfType<HUD>().UpdateStressBar();
+                    yield return new WaitForSeconds(delayBetweenOrders);
+                    myCalloutManager.EnableCallout(false);
                 }
-                else
-                {
-                    myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
-                    myCalloutManager.EnableCallout(true);
-                    StressManager.Instance.CumulativeStress++;
-                    Debug.Log("BAD ORDER");
-                }
-                //REMPLACE WITH EVENT SOLUTION
-                FindObjectOfType<HUD>().UpdateStressBar();
-                yield return new WaitForSeconds(1f);
-                myCalloutManager.EnableCallout(false);
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(delayBetweenRounds);
+        }
+    }
+
+    private void CalloutOrder(bool isGood)
+    {
+        if (isGood)
+        {
+            myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+            myCalloutManager.EnableCallout(true);
+            StressManager.Instance.CumulativeStress--;
+        }
+        else
+        {
+            myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+            myCalloutManager.EnableCallout(true);
+            StressManager.Instance.CumulativeStress++;
         }
     }
 
     public bool rngRequest()
     {
         int random = Random.Range(1, 101);
-        Debug.Log(random);
-        return random < 50;
+        return random < goodOrdenProbability;
     }
 }
