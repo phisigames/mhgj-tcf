@@ -10,9 +10,13 @@ public class AudioManager : MonoBehaviour
     public float MinimalPitch { get { return minimalPitch; } }
 
     [SerializeField]
+    private float maximalPitch = 1f;
+    public float MaximalPitch { get { return maximalPitch; } }
+
+    [SerializeField]
     [Range(0.01f, 0.5f)]
-    private float pitchDecrease = 0.01f;
-    public float PitchDecrease { get { return pitchDecrease; } }
+    private float pitchFactor = 0.05f;
+    public float PitchFactor { get { return pitchFactor; } }
 
     [SerializeField]
     private AudioSource myAudioSource;
@@ -27,6 +31,8 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             myAudioSource = GetComponent<AudioSource>();
+            StressManager.InDistress += DecreasePitch;
+            StressManager.InStress   += IncreasePitch;
         }
         else
         {
@@ -38,7 +44,15 @@ public class AudioManager : MonoBehaviour
     {
         if (myAudioSource.pitch > minimalPitch)
         {
-            myAudioSource.pitch -= pitchDecrease;
+            myAudioSource.pitch -= pitchFactor;
+        }
+    }
+
+    public void IncreasePitch()
+    {
+        if (myAudioSource.pitch < maximalPitch)
+        {
+            myAudioSource.pitch += pitchFactor;
         }
     }
 }

@@ -657,6 +657,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2458628095678863879, guid: 45839806950c1784587403d58df74dc3, type: 3}
+      propertyPath: saturationFactor
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458628095678863879, guid: 45839806950c1784587403d58df74dc3, type: 3}
+      propertyPath: maximalSaturation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2458628095678863930, guid: 45839806950c1784587403d58df74dc3, type: 3}
       propertyPath: m_Name
       value: PPManager
@@ -785,6 +793,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
+      propertyPath: pitchFactor
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: pitchDecrease
       value: 0.025
       objectReference: {fileID: 0}
@@ -838,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5796047207503046322, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}

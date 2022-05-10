@@ -29,12 +29,17 @@ public class SupervisorIA : MonoBehaviour
     private float delayBetweenRounds = 2f;
     public float DelayBetweenRounds { get { return delayBetweenRounds; } set { delayBetweenRounds = value; } }
 
+    [SerializeField]
+    [Range(1, 30)]
+    private int emotionalDamage  = 2;
+    public int EmotionalDamage { get { return emotionalDamage; } set { emotionalDamage = value; } }
+
     void Start()
     {
-        StartCoroutine(FollowPath());
+        StartCoroutine(MakingRounds());
     }
 
-    IEnumerator FollowPath()
+    IEnumerator MakingRounds()
     {
         while (true)
         {
@@ -62,8 +67,6 @@ public class SupervisorIA : MonoBehaviour
                         Debug.Log("BAD ORDER");
                         CalloutOrder(false);
                     }
-                    //REMPLACE WITH EVENT SOLUTION
-                    FindObjectOfType<HUD>().UpdateStressBar();
                     yield return new WaitForSeconds(delayBetweenOrders);
                     myCalloutManager.EnableCallout(false);
                 }
@@ -78,13 +81,13 @@ public class SupervisorIA : MonoBehaviour
         {
             myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
             myCalloutManager.EnableCallout(true);
-            StressManager.Instance.CumulativeStress--;
+            StressManager.DecreaseStress(emotionalDamage);
         }
         else
         {
             myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
             myCalloutManager.EnableCallout(true);
-            StressManager.Instance.CumulativeStress++;
+            StressManager.IncreaseStress(emotionalDamage);
         }
     }
 

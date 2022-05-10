@@ -11,9 +11,14 @@ public class WorkshopPPManager : MonoBehaviour
     public int MinimalSaturation { get { return minimalSaturation; } }
 
     [SerializeField]
-    [Range(1, 10)]
-    private float saturationDecrease = 2;
-    public float SaturationDecrease { get { return saturationDecrease; } }
+    [Range(0, 100)]
+    private int maximalSaturation = 0;
+    public int MaximalSaturation { get { return maximalSaturation; } }
+
+    [SerializeField]
+    [Range(1, 20)]
+    private float saturationFactor = 10;
+    public float SaturationFactor { get { return saturationFactor; } }
 
     [SerializeField]
     private ColorGrading myColorGrading;
@@ -21,13 +26,23 @@ public class WorkshopPPManager : MonoBehaviour
     private void Awake()
     {
         GetComponent<PostProcessVolume>().profile.TryGetSettings(out myColorGrading);
+        StressManager.InDistress += DecreaseSaturation;
+        StressManager.InStress   += IncreaseSaturation;
     }
 
     public void DecreaseSaturation()
     {
         if (myColorGrading.saturation.value > minimalSaturation)
         {
-            myColorGrading.saturation.value -= saturationDecrease;
+            myColorGrading.saturation.value -= saturationFactor;
+        }
+    }
+
+    public void IncreaseSaturation()
+    {
+        if (myColorGrading.saturation.value < maximalSaturation)
+        {
+            myColorGrading.saturation.value += saturationFactor;
         }
     }
 }

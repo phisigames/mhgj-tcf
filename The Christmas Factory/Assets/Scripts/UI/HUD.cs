@@ -8,7 +8,12 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private Slider stressBar;
 
-    void Start()
+    private void Awake()
+    {
+        StressManager.OnChangeStress += UpdateStressBar;
+    }
+
+    private void Start()
     {
         stressBar.value = StressManager.Instance.CumulativeStress;
         stressBar.maxValue = StressManager.Instance.StressCapacity;

@@ -5,17 +5,18 @@ using UnityEngine;
 public class EndpointCollisions : MonoBehaviour
 {
 
+    [SerializeField]
+    [Range(1, 30)]
+    private int emotionalDamage = 1;
+    public int EmotionalDamage { get { return emotionalDamage; } set { emotionalDamage = value; } }
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Toys"))
         {
-            StressManager.Instance.CumulativeStress++;
-            //REMPLACE WITH EVENT SOLUTION
-            FindObjectOfType<HUD>().UpdateStressBar();
-            FindObjectOfType<WorkshopPPManager>().DecreaseSaturation();
-            AudioManager.Instance.DecreasePitch();
+            StressManager.IncreaseStress(emotionalDamage);
             other.gameObject.SetActive(false);
         }
     }
-
 }
