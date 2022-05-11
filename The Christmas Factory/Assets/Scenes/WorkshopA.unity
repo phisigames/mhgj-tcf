@@ -726,6 +726,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4572464841609440939, guid: 40d5795e53b205a40a80a40a4c319e72, type: 3}
+      propertyPath: m_AssetsPPU
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40d5795e53b205a40a80a40a4c319e72, type: 3}
 --- !u!1001 &5636188414208770225
@@ -795,6 +799,10 @@ PrefabInstance:
     - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: pitchFactor
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
+      propertyPath: minimalPitch
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: pitchDecrease
