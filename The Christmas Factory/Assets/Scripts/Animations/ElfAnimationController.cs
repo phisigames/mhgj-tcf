@@ -14,6 +14,7 @@ public class ElfAnimationController : MonoBehaviour
     [SerializeField]
     [Range(1f, 10f)]
     private float acctionDelay;
+    public float AcctionDelay { get { return acctionDelay; } }
 
     [SerializeField] private bool inAction;
     public bool InAction { get { return inAction; } }
