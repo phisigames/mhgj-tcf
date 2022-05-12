@@ -20,7 +20,15 @@ public class ElfActionsManager : MonoBehaviour
     public GameObject MyVendingMachine { get { return myVendingMachine; } set { myVendingMachine = value; } }
 
     [SerializeField] private CalloutManager myCalloutManager = null;
-    public CalloutManager MyCalloutManager { get { return myCalloutManager; }}
+    public CalloutManager MyCalloutManager { get { return myCalloutManager; } }
+
+    [SerializeField]
+    private ElfAnimationController myElfAnimation = null;
+
+    private void Awake()
+    {
+        myElfAnimation = GetComponent<ElfAnimationController>();
+    }
 
 
     void Update()
@@ -46,7 +54,8 @@ public class ElfActionsManager : MonoBehaviour
                 //REMPLACE WITH EVENT SOLUTION
                 FindObjectOfType<HUD>().UpdateStressBar();
             }
-            Invoke("WrapSequence", 0.5f);
+            myElfAnimation.AcctionAnimation("Wrap");
+            WrapSequence();
         }
     }
 
@@ -59,6 +68,7 @@ public class ElfActionsManager : MonoBehaviour
             if (ElfData.canTalk())
             {
                 Debug.Log("TALKING TO ELF");
+                myElfAnimation.AcctionAnimation("Talk");
                 StartCoroutine(TalkSequence());
             }
         }
@@ -70,6 +80,7 @@ public class ElfActionsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("DRINKING COFFEE");
+            myElfAnimation.AcctionAnimation("Coffee");
             StartCoroutine(CoffeeSequence());
         }
     }
@@ -85,7 +96,7 @@ public class ElfActionsManager : MonoBehaviour
     }
 
     private IEnumerator TalkSequence()
-    {   
+    {
         myCalloutManager.SetCalloutSprite(CalloutTypes.Talk);
         myCalloutManager.EnableCallout(true);
         //ACA EFECTOS DE CHARLA

@@ -8,14 +8,31 @@ public class PlayerElfMovement : MonoBehaviour
     private float elfSpeed = 5;
 
     [SerializeField]
-    private Animator myAnimator;
+    private ElfAnimationController ElfAnimation;
 
-    [SerializeField]
-    private SpriteRenderer _renderer;
+
 
     void Update()
     {
-        MoveElf();
+        if (!ElfAnimation.InAction)
+        {
+            //FIX IDLE-> SEARCH OTHER SOLUTION
+            if (Input.GetKeyDown(KeyCode.W) ||
+                Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.A) ||
+                Input.GetKeyDown(KeyCode.S) ||
+                Input.GetKeyDown(KeyCode.UpArrow) ||
+                Input.GetKeyDown(KeyCode.RightArrow) ||
+                Input.GetKeyDown(KeyCode.LeftArrow) ||
+                Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                ElfAnimation.SlideIdle();
+            }
+
+            MoveElf();
+        }
+
+
     }
 
     private void MoveElf()
@@ -23,24 +40,8 @@ public class PlayerElfMovement : MonoBehaviour
         float verticalMove = GetMoveValue(Input.GetAxis("Vertical"));
         float horizontalMove = GetMoveValue(Input.GetAxis("Horizontal"));
 
-        if ((verticalMove == 0) && (horizontalMove == 0))
-        {
-            myAnimator.SetBool("isWalking", false);
-        }
-        else
-        {
-            myAnimator.SetBool("isWalking", true);
-            if (horizontalMove > 0)
-            {
-                _renderer.flipX = false;
-            }
-            else if (horizontalMove < 0)
-            {
-                _renderer.flipX = true;
-            }
-        }
-
         transform.Translate(horizontalMove, verticalMove, 0f);
+        ElfAnimation.Walking(horizontalMove, verticalMove);
     }
 
     private float GetMoveValue(float axisValue)

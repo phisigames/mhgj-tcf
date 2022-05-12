@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class ElfCollisions : MonoBehaviour
 {
-    [SerializeField] private ElfActionsManager myActionsManager = null;
+    [SerializeField]
+    private ElfActionsManager myActionsManager = null;
+
+    [SerializeField]
+    private ElfAnimationController myElfAnimation = null;
 
     private void Awake()
     {
         myActionsManager = GetComponent<ElfActionsManager>();
+        myElfAnimation = GetComponent<ElfAnimationController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (!myElfAnimation.InAction)
+        {
+            myElfAnimation.FrontIdle();
+        }
+
         if (other.CompareTag("ToyControls"))
         {
             myActionsManager.NextToy = other.transform.parent.gameObject;
@@ -31,6 +42,12 @@ public class ElfCollisions : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+
+        if (!myElfAnimation.InAction)
+        {
+            myElfAnimation.SlideIdle();
+        }
+
         if (other.CompareTag("ToyControls"))
         {
             myActionsManager.NextToy = null;
