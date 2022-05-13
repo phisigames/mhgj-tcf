@@ -10,7 +10,7 @@ public class SupervisorIA : MonoBehaviour
     [Range(0f, 5f)]
     private float speed = 1f;
 
-    [SerializeField] 
+    [SerializeField]
     private CalloutManager myCalloutManager = null;
     public CalloutManager MyCalloutManager { get { return myCalloutManager; } }
 
@@ -31,8 +31,16 @@ public class SupervisorIA : MonoBehaviour
 
     [SerializeField]
     [Range(1, 30)]
-    private int emotionalDamage  = 2;
+    private int emotionalDamage = 2;
     public int EmotionalDamage { get { return emotionalDamage; } set { emotionalDamage = value; } }
+
+    [SerializeField]
+    private SupervisorAnimationController mySupervisorAnimation = null;
+
+    private void Awake()
+    {
+        mySupervisorAnimation = GetComponent<SupervisorAnimationController>();
+    }
 
     void Start()
     {
@@ -47,6 +55,8 @@ public class SupervisorIA : MonoBehaviour
             {
                 Vector3 startPosition = transform.position;
                 Vector3 endPosition = path[i].transform.position;
+                Vector3 direction  = endPosition - startPosition;
+                mySupervisorAnimation.FlipSprite(direction.x);
                 float travelPercent = 0f;
                 while (travelPercent < 1f)
                 {
@@ -59,15 +69,16 @@ public class SupervisorIA : MonoBehaviour
                 {
                     if (rngRequest())
                     {
-                        Debug.Log("GOOD ORDER");
+                        mySupervisorAnimation.AcctionAnimation("Good");
                         CalloutOrder(true);
                     }
                     else
                     {
-                        Debug.Log("BAD ORDER");
+                        mySupervisorAnimation.AcctionAnimation("Bad");
                         CalloutOrder(false);
                     }
                     yield return new WaitForSeconds(delayBetweenOrders);
+                    mySupervisorAnimation.AcctionAnimation("Walk");
                     myCalloutManager.EnableCallout(false);
                 }
             }

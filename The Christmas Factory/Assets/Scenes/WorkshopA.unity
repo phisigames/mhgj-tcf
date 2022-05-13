@@ -189,11 +189,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 751650919392020701, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_SpeedVariation
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830536, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: spawnDelay
-      value: 1.5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954170234837830536, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: toyCapacity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830646, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_Name
@@ -249,7 +253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: conveyorMaxCapacity
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
@@ -409,7 +413,7 @@ PrefabInstance:
       objectReference: {fileID: 1552768323}
     - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: goodOrdenProbability
-      value: 10
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 4573404249678564434, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: m_RootOrder
@@ -417,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4573404249678564434, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.565155
+      value: 12.73
       objectReference: {fileID: 0}
     - target: {fileID: 4573404249678564434, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: m_LocalPosition.y
