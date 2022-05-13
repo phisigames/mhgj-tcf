@@ -193,11 +193,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830536, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: spawnDelay
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830536, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: toyCapacity
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830646, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_Name
@@ -213,11 +213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830647, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.04
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830647, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0506146
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1954170234837830647, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_LocalPosition.z
@@ -250,6 +250,22 @@ PrefabInstance:
     - target: {fileID: 1954170234837830647, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: workTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: breakTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: speedReel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: speedVariationReel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: conveyorMaxCapacity

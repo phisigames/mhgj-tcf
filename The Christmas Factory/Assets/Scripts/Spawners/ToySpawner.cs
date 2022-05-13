@@ -53,7 +53,7 @@ public class ToySpawner : MonoBehaviour
         for (int i = 0; i < toyPoll.Length; i++)
         {
             GameObject toy = toyPoll[i];
-            if (!toy.activeSelf)
+            if (!toy.activeSelf && !myConveyor.IsInBreak)
             {
                 toy.SetActive(true);
                 return;

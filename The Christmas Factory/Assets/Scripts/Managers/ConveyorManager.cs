@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,68 @@ public class ConveyorManager : MonoBehaviour
     [SerializeField]
     private ToySpawner myToySpawner;
 
+    [SerializeField]
+    private ConveyorAnimationController myConveyorAnimation = null;
+
+
+    // REAL CONFIG
+    [SerializeField]
+    private SurfaceEffector2D myRell = null;
+
+    [SerializeField]
+    [Range(1, 10)]
+    private int speedReel = 3;
+    public int SpeedReel { get { return speedReel; } set { speedReel = value; } }
+
+    [SerializeField]
+    [Range(1, 10)]
+    private int speedVariationReel = 3;
+    public int SpeedVariationReel { get { return speedVariationReel; } set { speedVariationReel = value; } }
+
+    // BREAK CONFIG
+    [SerializeField]
+    [Range(1, 120)]
+    private int breakTime = 10;
+    public int BreakTime { get { return breakTime; } set { breakTime = value; } }
+
+    [SerializeField]
+    [Range(1, 120)]
+    private int workTime = 10;
+    public int WorkTime { get { return workTime; } set { workTime = value; } }
+
+    [SerializeField]
+    private bool isTerminalRun = true;
+
+    [SerializeField]
+    private bool isInBreak = false;
+    public bool IsInBreak { get { return isInBreak; } set { isInBreak = value; } }
+
     private void Awake()
     {
         myToySpawner = GetComponent<ToySpawner>();
+        myConveyorAnimation = GetComponent<ConveyorAnimationController>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(RunConveyorTermninal());
+    }
+
+    private IEnumerator RunConveyorTermninal()
+    {
+        while (isTerminalRun)
+        {
+            Debug.Log("WORK TIME");
+            myConveyorAnimation.TriggerAnimation("On");
+            isInBreak = false;
+            ResetReel(speedReel,speedVariationReel);
+            yield return new WaitForSeconds(workTime);
+            Debug.Log("BREAK TIME");
+            myConveyorAnimation.TriggerAnimation("Off");
+            isInBreak = true;
+            ResetReel(0,0);
+            yield return new WaitForSeconds(breakTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -63,4 +123,9 @@ public class ConveyorManager : MonoBehaviour
         return GetComponentsInChildren<ToyMovement>();
     }
 
+    private void ResetReel(int speed, int speedVarition)
+    {
+        myRell.speed = speed;
+        myRell.speedVariation = speedVarition;
+    }
 }
