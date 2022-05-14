@@ -44,8 +44,8 @@ public class ElfActionsManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("WRAPPING TOY");
-            myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
-            myCalloutManager.EnableCallout(true);
+            //myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
+            //myCalloutManager.EnableCallout(true);
             myElfAnimation.AcctionAnimation("Wrap");
             ElfData.GiftWrapping++;
             if (ElfData.isLimitToWrap())
@@ -92,7 +92,7 @@ public class ElfActionsManager : MonoBehaviour
     private IEnumerator WrapSequence()
     {
         yield return new WaitForSeconds(myElfAnimation.AcctionDelay);
-        myCalloutManager.EnableCallout(false);
+        //myCalloutManager.EnableCallout(false);
     }
 
     private IEnumerator TalkSequence()
@@ -115,11 +115,11 @@ public class ElfActionsManager : MonoBehaviour
 
     private IEnumerator CoffeeSequence()
     {
-        myCalloutManager.SetCalloutSprite(CalloutTypes.Coffee);
-        myCalloutManager.EnableCallout(true);
+        //myCalloutManager.SetCalloutSprite(CalloutTypes.Coffee);
+        //myCalloutManager.EnableCallout(true);
         yield return new WaitForSeconds(myElfAnimation.AcctionDelay);
         StressManager.DecreaseStress(2);
         myVendingMachine = null;
-        myCalloutManager.EnableCallout(false);
+        //myCalloutManager.EnableCallout(false);
     }
 }
