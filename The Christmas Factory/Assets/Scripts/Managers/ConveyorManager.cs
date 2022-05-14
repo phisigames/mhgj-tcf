@@ -71,11 +71,13 @@ public class ConveyorManager : MonoBehaviour
         {
             Debug.Log("WORK TIME");
             myConveyorAnimation.TriggerAnimation("On");
+            myConveyorAnimation.TriggerReelAnimation("On");
             isInBreak = false;
             ResetReel(speedReel,speedVariationReel);
             yield return new WaitForSeconds(workTime);
             Debug.Log("BREAK TIME");
             myConveyorAnimation.TriggerAnimation("Off");
+            myConveyorAnimation.TriggerReelAnimation("Off");
             isInBreak = true;
             ResetReel(0,0);
             yield return new WaitForSeconds(breakTime);
