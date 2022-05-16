@@ -7,21 +7,17 @@ public class ElfCollisions : MonoBehaviour
     [SerializeField]
     private ElfActionsManager myActionsManager = null;
 
-    [SerializeField]
-    private ElfAnimationController myElfAnimation = null;
-
     private void Awake()
     {
         myActionsManager = GetComponent<ElfActionsManager>();
-        myElfAnimation = GetComponent<ElfAnimationController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (!myElfAnimation.InAction)
+        if (!myActionsManager.MyElfAnimation.InAction)
         {
-            myElfAnimation.FrontIdle();
+            myActionsManager.MyElfAnimation.FrontIdle();
         }
 
         if (other.CompareTag("ToyControls"))
@@ -43,9 +39,9 @@ public class ElfCollisions : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
 
-        if (!myElfAnimation.InAction)
+        if (!myActionsManager.MyElfAnimation.InAction)
         {
-            myElfAnimation.SlideIdle();
+            myActionsManager.MyElfAnimation.SlideIdle();
         }
 
         if (other.CompareTag("ToyControls"))

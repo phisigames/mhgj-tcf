@@ -24,69 +24,53 @@ public class ElfActionsManager : MonoBehaviour
 
     [SerializeField]
     private ElfAnimationController myElfAnimation = null;
+    public ElfAnimationController MyElfAnimation { get { return myElfAnimation; } }
 
     private void Awake()
     {
         myElfAnimation = GetComponent<ElfAnimationController>();
     }
 
-
-    void Update()
-    {
-        ToyWrapping();
-        Talk();
-        HavingCoffee();
-    }
-
-    private void ToyWrapping()
+    public void ToyWrapping()
     {
         if (nextToy == null) { return; }
-        if (Input.GetKeyDown(KeyCode.Space))
+        Debug.Log("WRAPPING TOY");
+        //myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
+        //myCalloutManager.EnableCallout(true);
+        myElfAnimation.AcctionAnimation("Wrap");
+        ElfData.GiftWrapping++;
+        if (ElfData.isLimitToWrap())
         {
-            Debug.Log("WRAPPING TOY");
-            //myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
-            //myCalloutManager.EnableCallout(true);
-            myElfAnimation.AcctionAnimation("Wrap");
-            ElfData.GiftWrapping++;
-            if (ElfData.isLimitToWrap())
-            {
-                ElfData.GiftWrapping = 0;
-                StressManager.IncreaseStress(1);
-            }
-
-            if (nextToy.activeSelf)
-            {
-                nextToy.SetActive(false);
-                nextToy = null;
-            }
-            StartCoroutine(WrapSequence());
+            ElfData.GiftWrapping = 0;
+            StressManager.IncreaseStress(1);
         }
+
+        if (nextToy.activeSelf)
+        {
+            nextToy.SetActive(false);
+            nextToy = null;
+        }
+        StartCoroutine(WrapSequence());
+
     }
 
-    private void Talk()
+    public void Talk()
     {
         if (myInterlocutor == null) { return; }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ElfData.canTalk())
         {
-            Debug.Log("TALK");
-            if (ElfData.canTalk())
-            {
-                Debug.Log("TALKING TO ELF");
-                myElfAnimation.AcctionAnimation("Talk");
-                StartCoroutine(TalkSequence());
-            }
+            Debug.Log("TALKING TO ELF");
+            myElfAnimation.AcctionAnimation("Talk");
+            StartCoroutine(TalkSequence());
         }
     }
 
-    private void HavingCoffee()
+    public void HavingCoffee()
     {
         if (myVendingMachine == null) { return; }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("DRINKING COFFEE");
-            myElfAnimation.AcctionAnimation("Coffee");
-            StartCoroutine(CoffeeSequence());
-        }
+        Debug.Log("DRINKING COFFEE");
+        myElfAnimation.AcctionAnimation("Coffee");
+        StartCoroutine(CoffeeSequence());
     }
 
     private IEnumerator WrapSequence()
@@ -122,4 +106,19 @@ public class ElfActionsManager : MonoBehaviour
         myVendingMachine = null;
         //myCalloutManager.EnableCallout(false);
     }
+
+    public void MoveElf(float xDirection, float yDirection)
+    {
+        float xMove = GetMoveValue(xDirection);
+        float yMove = GetMoveValue(yDirection);
+
+        transform.Translate(xMove, yMove, 0f);
+        myElfAnimation.Walking(xMove, yMove);
+    }
+
+    private float GetMoveValue(float direction)
+    {
+        return direction * elfData.WalkSpeed * Time.deltaTime;
+    }
+
 }

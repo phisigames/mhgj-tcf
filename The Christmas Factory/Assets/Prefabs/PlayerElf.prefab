@@ -117,10 +117,10 @@ GameObject:
   - component: {fileID: 7953993187289265840}
   - component: {fileID: 8728967160151416917}
   - component: {fileID: 4267814321855832728}
-  - component: {fileID: 6183363154294847932}
   - component: {fileID: 1891499248967173775}
-  - component: {fileID: 4283592990916492814}
+  - component: {fileID: 6183363154294847932}
   - component: {fileID: 4340055799802438071}
+  - component: {fileID: 494389287059448620}
   m_Layer: 0
   m_Name: PlayerElf
   m_TagString: Player
@@ -196,24 +196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resistenceToWrap: 3
   resistenceToTalk: 3
+  walkSpeed: 5
   giftWrapping: 0
   talkTime: 0
---- !u!114 &6183363154294847932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636188415155848673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6420bc75fa12e914783a05f4292476e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myAnimator: {fileID: 4584490157022156747}
-  myRenderer: {fileID: 1772687074264827183}
-  acctionDelay: 2.5
-  inAction: 0
 --- !u!114 &1891499248967173775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +218,7 @@ MonoBehaviour:
   myVendingMachine: {fileID: 0}
   myCalloutManager: {fileID: 8364923103879750413}
   myElfAnimation: {fileID: 0}
---- !u!114 &4283592990916492814
+--- !u!114 &6183363154294847932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,11 +227,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5636188415155848673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d847ff7845ed2dd48846513731c8accc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6420bc75fa12e914783a05f4292476e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elfSpeed: 10
-  ElfAnimation: {fileID: 6183363154294847932}
+  myAnimator: {fileID: 4584490157022156747}
+  myRenderer: {fileID: 1772687074264827183}
+  acctionDelay: 2.5
+  inAction: 0
 --- !u!114 &4340055799802438071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +247,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myActionsManager: {fileID: 0}
-  myElfAnimation: {fileID: 0}
+--- !u!114 &494389287059448620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636188415155848673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf55ac1f4f65b94a88a3e7e6f27eabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myActionsManager: {fileID: 0}
 --- !u!1001 &6575446740260484775
 PrefabInstance:
   m_ObjectHideFlags: 0
