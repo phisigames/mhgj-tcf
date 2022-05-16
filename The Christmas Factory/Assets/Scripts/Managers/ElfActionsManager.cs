@@ -29,6 +29,7 @@ public class ElfActionsManager : MonoBehaviour
     private void Awake()
     {
         myElfAnimation = GetComponent<ElfAnimationController>();
+        elfData = GetComponent<Elf>();
     }
 
     public void ToyWrapping()
