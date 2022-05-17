@@ -26,16 +26,20 @@ public class ElfActionsManager : MonoBehaviour
     private ElfAnimationController myElfAnimation = null;
     public ElfAnimationController MyElfAnimation { get { return myElfAnimation; } }
 
+    [SerializeField]
+    private Rigidbody2D myElfRigidbody2D;
+
     private void Awake()
     {
         myElfAnimation = GetComponent<ElfAnimationController>();
         elfData = GetComponent<Elf>();
+        myElfRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public void ToyWrapping()
     {
         if (nextToy == null) { return; }
-        Debug.Log("WRAPPING TOY");
+        //Debug.Log("WRAPPING TOY");
         //myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
         //myCalloutManager.EnableCallout(true);
         myElfAnimation.AcctionAnimation("Wrap");
@@ -60,7 +64,7 @@ public class ElfActionsManager : MonoBehaviour
         if (myInterlocutor == null) { return; }
         if (ElfData.canTalk())
         {
-            Debug.Log("TALKING TO ELF");
+            //Debug.Log("TALKING TO ELF");
             myElfAnimation.AcctionAnimation("Talk");
             StartCoroutine(TalkSequence());
         }
@@ -69,7 +73,7 @@ public class ElfActionsManager : MonoBehaviour
     public void HavingCoffee()
     {
         if (myVendingMachine == null) { return; }
-        Debug.Log("DRINKING COFFEE");
+        //Debug.Log("DRINKING COFFEE");
         myElfAnimation.AcctionAnimation("Coffee");
         StartCoroutine(CoffeeSequence());
     }
@@ -90,10 +94,10 @@ public class ElfActionsManager : MonoBehaviour
         {
             yield return new WaitForSeconds(secondsPerResistence);
             ElfData.TalkTime++;
-            Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
+            //Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
         }
         ElfData.TalkTime = 0;
-        Debug.Log("RESET TALK");
+        //Debug.Log("RESET TALK");
         myCalloutManager.EnableCallout(false);
         StressManager.DecreaseStress(2);
     }
@@ -108,18 +112,12 @@ public class ElfActionsManager : MonoBehaviour
         //myCalloutManager.EnableCallout(false);
     }
 
-    public void MoveElf(float xDirection, float yDirection)
+    public void MoveElf(float xPosition, float yPosition)
     {
-        float xMove = GetMoveValue(xDirection);
-        float yMove = GetMoveValue(yDirection);
+        Vector2 direction = new Vector2(xPosition, yPosition);
 
-        transform.Translate(xMove, yMove, 0f);
-        myElfAnimation.Walking(xMove, yMove);
+        //transform.Translate(xMove, yMove, 0f);
+        myElfRigidbody2D.MovePosition((Vector2)transform.position + direction * Time.deltaTime * elfData.WalkSpeed);
+        myElfAnimation.Walking(xPosition, yPosition);
     }
-
-    private float GetMoveValue(float direction)
-    {
-        return direction * elfData.WalkSpeed * Time.deltaTime;
-    }
-
-}
+ }

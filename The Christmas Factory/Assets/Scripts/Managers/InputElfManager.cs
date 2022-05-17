@@ -31,7 +31,7 @@ public class InputElfManager : MonoBehaviour
                 myActionsManager.MyElfAnimation.SlideIdle();
             }
 
-            myActionsManager.MoveElf(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+
         }
 
         //INPUT SPACE
@@ -41,5 +41,10 @@ public class InputElfManager : MonoBehaviour
             myActionsManager.Talk();
             myActionsManager.HavingCoffee();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        myActionsManager.MoveElf(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 }
