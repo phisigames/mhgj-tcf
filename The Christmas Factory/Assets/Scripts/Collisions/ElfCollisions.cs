@@ -43,7 +43,7 @@ public class ElfCollisions : MonoBehaviour
 
         if (other.CompareTag("TalkControls"))
         {
-            myActionsManager.MyInterlocutor = null;
+            Invoke("ResetInterlocutor", 1f);
         }
 
         if (other.CompareTag("VendingMachines"))
@@ -51,4 +51,10 @@ public class ElfCollisions : MonoBehaviour
             myActionsManager.MyVendingMachine = null;
         }
     }
+
+    private void ResetInterlocutor()
+    {
+        myActionsManager.MyInterlocutor = null;
+    }
+
 }

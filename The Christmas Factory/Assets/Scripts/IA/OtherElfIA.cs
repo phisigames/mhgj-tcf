@@ -31,7 +31,6 @@ public class OtherElfIA : MonoBehaviour
 
         if (myActionsManager.MyConveyor.IsInBreak && isWorking)
         {
-            Debug.Log("IN BREAK");
             isWorking = false;
             StartCoroutine(BreakBehaviour());
         }
@@ -42,7 +41,6 @@ public class OtherElfIA : MonoBehaviour
         float myBreakTime = myActionsManager.MyConveyor.BreakTime - breakGap;
         for (int i = 0; i < path.Count; i++)
         {
-            Debug.Log("PONT: " + i);
             Vector3 startPosition = transform.position;
             Vector3 endPosition = path[i].transform.position;
             Vector3 direction = endPosition - startPosition;
@@ -66,4 +64,30 @@ public class OtherElfIA : MonoBehaviour
         }
         isWorking = true;
     }
+
+    public bool ElfResponse()
+    {
+        myActionsManager.MyElfAnimation.AcctionAnimation("Talk");
+        Invoke("HideCallout", myActionsManager.MyElfAnimation.AcctionDelay);
+        if (myActionsManager.MyConveyor.IsInBreak)
+        {
+            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+            myActionsManager.MyCalloutManager.EnableCallout(true);
+            return true;
+        }
+        else
+        {
+            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+            myActionsManager.MyCalloutManager.EnableCallout(true);
+            return false;
+        }
+
+    }
+
+
+    private void HideCallout()
+    {
+        myActionsManager.MyCalloutManager.EnableCallout(false);
+    }
+
 }

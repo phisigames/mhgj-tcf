@@ -28,6 +28,7 @@ public class ElfActionsManager : MonoBehaviour
 
     [SerializeField]
     private Rigidbody2D myElfRigidbody2D;
+    public Rigidbody2D MyElfRigidbody2D { get { return myElfRigidbody2D; } }
 
     private void Awake()
     {
@@ -95,7 +96,19 @@ public class ElfActionsManager : MonoBehaviour
         }
         ElfData.TalkTime = 0;
         myCalloutManager.EnableCallout(false);
-        StressManager.DecreaseStress(2);
+        if (myInterlocutor != null)
+        {
+            bool response = myInterlocutor.GetComponent<OtherElfIA>().ElfResponse();
+            if (response)
+            {
+                StressManager.DecreaseStress(2);
+            }
+            else
+            {
+                StressManager.IncreaseStress(2);
+            }
+
+        }
     }
 
     private IEnumerator CoffeeSequence()
@@ -114,4 +127,4 @@ public class ElfActionsManager : MonoBehaviour
         myElfRigidbody2D.MovePosition((Vector2)transform.position + direction * Time.deltaTime * elfData.WalkSpeed);
         myElfAnimation.Walking(xPosition, yPosition);
     }
- }
+}
