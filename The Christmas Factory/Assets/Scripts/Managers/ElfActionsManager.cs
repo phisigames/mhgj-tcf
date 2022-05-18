@@ -64,7 +64,6 @@ public class ElfActionsManager : MonoBehaviour
         if (myInterlocutor == null) { return; }
         if (ElfData.canTalk())
         {
-            //Debug.Log("TALKING TO ELF");
             myElfAnimation.AcctionAnimation("Talk");
             StartCoroutine(TalkSequence());
         }
@@ -73,7 +72,6 @@ public class ElfActionsManager : MonoBehaviour
     public void HavingCoffee()
     {
         if (myVendingMachine == null) { return; }
-        //Debug.Log("DRINKING COFFEE");
         myElfAnimation.AcctionAnimation("Coffee");
         StartCoroutine(CoffeeSequence());
     }
@@ -94,10 +92,8 @@ public class ElfActionsManager : MonoBehaviour
         {
             yield return new WaitForSeconds(secondsPerResistence);
             ElfData.TalkTime++;
-            //Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
         }
         ElfData.TalkTime = 0;
-        //Debug.Log("RESET TALK");
         myCalloutManager.EnableCallout(false);
         StressManager.DecreaseStress(2);
     }
@@ -115,8 +111,6 @@ public class ElfActionsManager : MonoBehaviour
     public void MoveElf(float xPosition, float yPosition)
     {
         Vector2 direction = new Vector2(xPosition, yPosition);
-
-        //transform.Translate(xMove, yMove, 0f);
         myElfRigidbody2D.MovePosition((Vector2)transform.position + direction * Time.deltaTime * elfData.WalkSpeed);
         myElfAnimation.Walking(xPosition, yPosition);
     }

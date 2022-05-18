@@ -45,6 +45,9 @@ public class InputElfManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        myActionsManager.MoveElf(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (!myActionsManager.MyElfAnimation.InAction)
+        {
+            myActionsManager.MoveElf(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        }
     }
 }

@@ -86,11 +86,6 @@ public class ConveyorManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Elfs"))
-        {
-            other.GetComponent<ElfActionsManager>().MyConveyor = this;
-        }
-
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity++;
@@ -99,11 +94,6 @@ public class ConveyorManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Elfs"))
-        {
-            other.GetComponent<ElfActionsManager>().MyConveyor = null;
-        }
-
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity--;

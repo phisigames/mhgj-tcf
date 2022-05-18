@@ -15,35 +15,27 @@ public class ElfCollisions : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (!myActionsManager.MyElfAnimation.InAction)
-        {
-            myActionsManager.MyElfAnimation.FrontIdle();
-        }
-
         if (other.CompareTag("ToyControls"))
         {
+            myActionsManager.MyElfAnimation.FrontIdle();
             myActionsManager.NextToy = other.transform.parent.gameObject;
         }
 
         if (other.CompareTag("TalkControls"))
         {
+            myActionsManager.MyElfAnimation.FrontIdle();
             myActionsManager.MyInterlocutor = other.transform.parent.GetComponent<Elf>();
         }
 
         if (other.CompareTag("VendingMachines"))
         {
+            myActionsManager.MyElfAnimation.FrontIdle();
             myActionsManager.MyVendingMachine = other.gameObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-
-        if (!myActionsManager.MyElfAnimation.InAction)
-        {
-            myActionsManager.MyElfAnimation.SlideIdle();
-        }
-
         if (other.CompareTag("ToyControls"))
         {
             myActionsManager.NextToy = null;

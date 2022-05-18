@@ -16,7 +16,7 @@ public class Elf : MonoBehaviour
     public int ResistenceToTalk { get { return resistenceToTalk; } set { resistenceToTalk = value; } }
 
     [SerializeField]
-    [Range(5, 50)]
+    [Range(1, 50)]
     private float walkSpeed = 5;
     public float WalkSpeed { get { return walkSpeed; } set { walkSpeed = value; } }
 
