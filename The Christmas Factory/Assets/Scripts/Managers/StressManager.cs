@@ -60,6 +60,7 @@ public class StressManager : MonoBehaviour
         if (instance.IsInDistress())
         {
             InDistress?.Invoke();
+            GameManager.Instance.DistressHits++;
         }
 
         OnChangeStress?.Invoke();

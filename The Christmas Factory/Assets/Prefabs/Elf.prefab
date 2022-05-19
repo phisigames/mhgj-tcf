@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5527044840557917206}
   - component: {fileID: 5881366427735220908}
   - component: {fileID: 1753647256820822170}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Elf
   m_TagString: Elfs
   m_Icon: {fileID: 0}
@@ -198,6 +198,9 @@ MonoBehaviour:
   resistenceToWrap: 3
   resistenceToTalk: 3
   walkSpeed: 5
+  stressCapacity: 15
+  cumulativeStress: 0
+  isNPC: 0
   giftWrapping: 0
   talkTime: 0
 --- !u!114 &7643335156430747554
@@ -220,6 +223,9 @@ MonoBehaviour:
   myCalloutManager: {fileID: 9205877307202004376}
   myElfAnimation: {fileID: 0}
   myElfRigidbody2D: {fileID: 0}
+  talkEmotionalDamage: 2
+  wrapEmotionalDamage: 1
+  coffeeEmotionalDamage: 2
 --- !u!114 &5527044840557917206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +267,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7f4efb32959ec499b5b2b2b5cfdb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: []
+  pathLicense: []
   myActionsManager: {fileID: 0}
+  isWorking: 1
+  breakGap: 1
+  isInLicense: 0
+  licenseTime: 8
 --- !u!1001 &5318440243868347354
 PrefabInstance:
   m_ObjectHideFlags: 0

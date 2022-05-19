@@ -43,7 +43,7 @@ public class ElfCollisions : MonoBehaviour
 
         if (other.CompareTag("TalkControls"))
         {
-            Invoke("ResetInterlocutor", 1f);
+            Invoke("ResetInterlocutor", 0.5f);
         }
 
         if (other.CompareTag("VendingMachines"))
