@@ -62,6 +62,18 @@ public class ConveyorManager : MonoBehaviour
 
     private void Start()
     {
+        TerminalOn();
+    }
+
+    public void TerminalOff()
+    {
+        isTerminalRun = false;
+        ResetTerminalOff();
+    }
+
+    public void TerminalOn()
+    {
+        isTerminalRun = true;
         StartCoroutine(RunConveyorTermninal());
     }
 
@@ -69,28 +81,33 @@ public class ConveyorManager : MonoBehaviour
     {
         while (isTerminalRun)
         {
-            Debug.Log("WORK TIME");
-            myConveyorAnimation.TriggerAnimation("On");
-            myConveyorAnimation.TriggerReelAnimation("On");
-            isInBreak = false;
-            ResetReel(speedReel,speedVariationReel);
+            //Debug.Log("WORK TIME");
+            ResetTerminalOn();
             yield return new WaitForSeconds(workTime);
-            Debug.Log("BREAK TIME");
-            myConveyorAnimation.TriggerAnimation("Off");
-            myConveyorAnimation.TriggerReelAnimation("Off");
-            isInBreak = true;
-            ResetReel(0,0);
+            //Debug.Log("BREAK TIME");
+            ResetTerminalOff();
             yield return new WaitForSeconds(breakTime);
         }
     }
 
+    private void ResetTerminalOn()
+    {
+        myConveyorAnimation.TriggerAnimation("On");
+        myConveyorAnimation.TriggerReelAnimation("On");
+        isInBreak = false;
+        ResetReel(speedReel, speedVariationReel);
+    }
+
+    private void ResetTerminalOff()
+    {
+        myConveyorAnimation.TriggerAnimation("Off");
+        myConveyorAnimation.TriggerReelAnimation("Off");
+        isInBreak = true;
+        ResetReel(0, 0);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<ElfActionsManager>().MyConveyor = this;
-        }
-
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity++;
@@ -99,11 +116,6 @@ public class ConveyorManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<ElfActionsManager>().MyConveyor = null;
-        }
-
         if (other.CompareTag("Toys"))
         {
             conveyorCapacity--;

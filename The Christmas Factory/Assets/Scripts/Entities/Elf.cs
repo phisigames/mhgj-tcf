@@ -16,10 +16,24 @@ public class Elf : MonoBehaviour
     public int ResistenceToTalk { get { return resistenceToTalk; } set { resistenceToTalk = value; } }
 
     [SerializeField]
-    [Range(5, 50)]
+    [Range(1, 50)]
     private float walkSpeed = 5;
     public float WalkSpeed { get { return walkSpeed; } set { walkSpeed = value; } }
 
+    //INDIVIDUAL STRESS MANAGMENT (CODE NEEDED FOR FUTURE  CO-OP FUNCTION)
+    [SerializeField]
+    [Range(10, 100)]
+    private int stressCapacity = 15;
+    public int StressCapacity { get { return stressCapacity; } }
+
+    [SerializeField]
+    private int cumulativeStress = 0;
+    public int CumulativeStress { get { return cumulativeStress; } set { cumulativeStress = value; } }
+
+    [SerializeField]
+    private bool isNPC = false;
+    public bool IsNPC { get { return isNPC; } }
+    //------------------------------------------------------------------------------------------------------
     //RUNTIME DATA
     [SerializeField]
     private int giftWrapping = 0;
@@ -43,5 +57,30 @@ public class Elf : MonoBehaviour
     public bool canTalk()
     {
         return talkTime == 0;
+    }
+
+    public void DecreaseStress(int value)
+    {
+        cumulativeStress -= value;
+
+        if (cumulativeStress < 0)
+        {
+            cumulativeStress = 0;
+        }
+    }
+
+    public void IncreaseStress(int value)
+    {
+        cumulativeStress += value;
+
+        if (cumulativeStress > stressCapacity)
+        {
+            cumulativeStress = stressCapacity;
+        }
+    }
+
+    public bool isLimitToStress()
+    {
+        return cumulativeStress == stressCapacity;
     }
 }

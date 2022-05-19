@@ -26,23 +26,50 @@ public class ElfActionsManager : MonoBehaviour
     private ElfAnimationController myElfAnimation = null;
     public ElfAnimationController MyElfAnimation { get { return myElfAnimation; } }
 
+    [SerializeField]
+    private Rigidbody2D myElfRigidbody2D;
+    public Rigidbody2D MyElfRigidbody2D { get { return myElfRigidbody2D; } }
+
+    //------------- DAMAGE ACTION ------------- 
+    [SerializeField]
+    [Range(1, 30)]
+    private int talkEmotionalDamage = 2;
+    public int TalkEmotionalDamage { get { return talkEmotionalDamage; } set { talkEmotionalDamage = value; } }
+
+    [SerializeField]
+    [Range(1, 30)]
+    private int wrapEmotionalDamage = 1;
+    public int WrapEmotionalDamage { get { return wrapEmotionalDamage; } set { wrapEmotionalDamage = value; } }
+
+    [SerializeField]
+    [Range(1, 30)]
+    private int coffeeEmotionalDamage = 2;
+    public int CoffeeEmotionalDamage { get { return coffeeEmotionalDamage; } set { coffeeEmotionalDamage = value; } }
+
     private void Awake()
     {
         myElfAnimation = GetComponent<ElfAnimationController>();
+        elfData = GetComponent<Elf>();
+        myElfRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public void ToyWrapping()
     {
         if (nextToy == null) { return; }
-        Debug.Log("WRAPPING TOY");
-        //myCalloutManager.SetCalloutSprite(CalloutTypes.Wrap);
-        //myCalloutManager.EnableCallout(true);
+
         myElfAnimation.AcctionAnimation("Wrap");
         ElfData.GiftWrapping++;
+        GameManager.Instance.CumulativeGifts++;
         if (ElfData.isLimitToWrap())
         {
             ElfData.GiftWrapping = 0;
-            StressManager.IncreaseStress(1);
+            ElfData.IncreaseStress(wrapEmotionalDamage);
+            if (!ElfData.IsNPC)
+            {
+                StressManager.IncreaseStress(wrapEmotionalDamage);
+            }
+            myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+            myCalloutManager.EnableCallout(true);
         }
 
         if (nextToy.activeSelf)
@@ -59,7 +86,6 @@ public class ElfActionsManager : MonoBehaviour
         if (myInterlocutor == null) { return; }
         if (ElfData.canTalk())
         {
-            Debug.Log("TALKING TO ELF");
             myElfAnimation.AcctionAnimation("Talk");
             StartCoroutine(TalkSequence());
         }
@@ -68,7 +94,6 @@ public class ElfActionsManager : MonoBehaviour
     public void HavingCoffee()
     {
         if (myVendingMachine == null) { return; }
-        Debug.Log("DRINKING COFFEE");
         myElfAnimation.AcctionAnimation("Coffee");
         StartCoroutine(CoffeeSequence());
     }
@@ -76,7 +101,7 @@ public class ElfActionsManager : MonoBehaviour
     private IEnumerator WrapSequence()
     {
         yield return new WaitForSeconds(myElfAnimation.AcctionDelay);
-        //myCalloutManager.EnableCallout(false);
+        myCalloutManager.EnableCallout(false);
     }
 
     private IEnumerator TalkSequence()
@@ -89,36 +114,37 @@ public class ElfActionsManager : MonoBehaviour
         {
             yield return new WaitForSeconds(secondsPerResistence);
             ElfData.TalkTime++;
-            Debug.Log("SEGUNDO DE CHARLA " + ElfData.TalkTime);
         }
         ElfData.TalkTime = 0;
-        Debug.Log("RESET TALK");
         myCalloutManager.EnableCallout(false);
-        StressManager.DecreaseStress(2);
+        if (myInterlocutor != null)
+        {
+            bool response = myInterlocutor.GetComponent<OtherElfIA>().ElfResponse();
+            if (response)
+            {
+                StressManager.DecreaseStress(talkEmotionalDamage);
+            }
+            else
+            {
+                StressManager.IncreaseStress(talkEmotionalDamage);
+            }
+        }
     }
 
     private IEnumerator CoffeeSequence()
     {
-        //myCalloutManager.SetCalloutSprite(CalloutTypes.Coffee);
-        //myCalloutManager.EnableCallout(true);
+        myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+        myCalloutManager.EnableCallout(true);
         yield return new WaitForSeconds(myElfAnimation.AcctionDelay);
-        StressManager.DecreaseStress(2);
+        StressManager.DecreaseStress(CoffeeEmotionalDamage);
         myVendingMachine = null;
-        //myCalloutManager.EnableCallout(false);
+        myCalloutManager.EnableCallout(false);
     }
 
-    public void MoveElf(float xDirection, float yDirection)
+    public void MoveElf(float xPosition, float yPosition)
     {
-        float xMove = GetMoveValue(xDirection);
-        float yMove = GetMoveValue(yDirection);
-
-        transform.Translate(xMove, yMove, 0f);
-        myElfAnimation.Walking(xMove, yMove);
+        Vector2 direction = new Vector2(xPosition, yPosition);
+        myElfRigidbody2D.MovePosition((Vector2)transform.position + direction * Time.deltaTime * elfData.WalkSpeed);
+        myElfAnimation.Walking(xPosition, yPosition);
     }
-
-    private float GetMoveValue(float direction)
-    {
-        return direction * elfData.WalkSpeed * Time.deltaTime;
-    }
-
 }

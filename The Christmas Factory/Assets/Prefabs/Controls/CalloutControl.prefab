@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7080380699871053738}
   - component: {fileID: 3411055358834906538}
   m_Layer: 0
-  m_Name: Callout
+  m_Name: CalloutControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

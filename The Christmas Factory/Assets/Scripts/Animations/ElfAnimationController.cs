@@ -13,7 +13,7 @@ public class ElfAnimationController : MonoBehaviour
 
     [SerializeField]
     [Range(1f, 10f)]
-    private float acctionDelay;
+    private float acctionDelay = 1.5f;
     public float AcctionDelay { get { return acctionDelay; } }
 
     [SerializeField] private bool inAction;
@@ -35,14 +35,19 @@ public class ElfAnimationController : MonoBehaviour
     {
         if ((xDirection == 0) && (yDirection == 0))
         {
-            myAnimator.SetBool("isWalking", false);
+            WalkingAnimator(false);
         }
         else
         {
-            myAnimator.SetBool("isWalking", true);
+            WalkingAnimator(true);
         }
 
         FlipSprite(xDirection);
+    }
+
+    public void WalkingAnimator(bool status)
+    {
+        myAnimator.SetBool("isWalking", status);
     }
 
     public void SlideIdle()
@@ -65,7 +70,7 @@ public class ElfAnimationController : MonoBehaviour
     private IEnumerator ResetAnimation()
     {
         yield return new WaitForSeconds(acctionDelay);
+        SlideIdle();
         inAction = false;
-        FrontIdle();
     }
 }
