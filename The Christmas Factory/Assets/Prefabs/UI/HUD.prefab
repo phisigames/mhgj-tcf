@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 399eec980a9de4d45828051be6082e11, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea96a18e0129c11479b5ec555d2eb86b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2103,6 +2103,12 @@ MonoBehaviour:
   statusGiftValue: {fileID: 2799900060092627150}
   statusLicenseValue: {fileID: 890263887025786740}
   statusDistressValue: {fileID: 1056632225583053022}
+  fillImageComponent: {fileID: 7299166727305860534}
+  sliderImageComponent: {fileID: 7299166727787963873}
+  stressBarSprite: {fileID: -421194188, guid: 2f8a08d450097694bbe56c56b06da8a1, type: 3}
+  distressBarSprite: {fileID: -1572132992, guid: 2f8a08d450097694bbe56c56b06da8a1, type: 3}
+  stressFillSprite: {fileID: 21300000, guid: ea96a18e0129c11479b5ec555d2eb86b, type: 3}
+  distressFillSprite: {fileID: 21300000, guid: 27409783db7ae794ab7e8808d16621bb, type: 3}
 --- !u!1 &7299166728123161147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,7 +2196,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 50
   m_WholeNumbers: 1
-  m_Value: 27
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

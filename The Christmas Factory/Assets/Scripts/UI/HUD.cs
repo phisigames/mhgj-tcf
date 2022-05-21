@@ -34,14 +34,30 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI statusDistressValue;
 
-    private void Awake()
-    {
+    //------------------ Change stress bar UI --------//
+    [SerializeField]
+    private Image fillImageComponent;
 
-    }
+    [SerializeField]
+    private Image sliderImageComponent;
+
+    [SerializeField]
+    private Sprite stressBarSprite;
+
+    [SerializeField]
+    private Sprite distressBarSprite;
+
+    [SerializeField]
+    private Sprite stressFillSprite;
+
+    [SerializeField]
+    private Sprite distressFillSprite;
 
     private void OnEnable()
     {
         StressManager.OnChangeStress += UpdateStressBar;
+        StressManager.InDistress += ShowDistressBar;
+        StressManager.InStress += ShowStressBar;
         GameManager.InCondition += OpenStatusPanel;
     }
 
@@ -56,10 +72,8 @@ public class HUD : MonoBehaviour
         giftConfigLabel.text = GameManager.Instance.GetGiftCount().ToString();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("PANEL STATUS");
             UpdateStatistics();
             statusPanel.SetActive(!statusPanel.activeSelf);
-
         }
     }
 
@@ -107,7 +121,21 @@ public class HUD : MonoBehaviour
     private void OnDisable()
     {
         StressManager.OnChangeStress -= UpdateStressBar;
+        StressManager.InDistress -= ShowDistressBar;
+        StressManager.InStress -= ShowStressBar;
         GameManager.InCondition -= OpenStatusPanel;
+    }
+
+    private void ShowStressBar()
+    {
+        sliderImageComponent.sprite = stressBarSprite;
+        fillImageComponent.sprite = stressFillSprite;
+    }
+
+    private void ShowDistressBar()
+    {
+        sliderImageComponent.sprite = distressBarSprite;
+        fillImageComponent.sprite = distressFillSprite;
     }
 
 }
