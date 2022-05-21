@@ -24,7 +24,7 @@ public class Elf : MonoBehaviour
     [SerializeField]
     [Range(10, 100)]
     private int stressCapacity = 15;
-    public int StressCapacity { get { return stressCapacity; } }
+    public int StressCapacity { get { return stressCapacity; } set { stressCapacity = value; }}
 
     [SerializeField]
     private int cumulativeStress = 0;

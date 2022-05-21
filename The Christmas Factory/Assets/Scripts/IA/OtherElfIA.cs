@@ -28,6 +28,7 @@ public class OtherElfIA : MonoBehaviour
     void Start()
     {
         myActionsManager = GetComponent<ElfActionsManager>();
+        SetStressCapacity((int)DifficultyManager.Instance.StressNPC);
     }
 
     // Update is called once per frame
@@ -148,4 +149,8 @@ public class OtherElfIA : MonoBehaviour
         myActionsManager.MyCalloutManager.EnableCallout(false);
     }
 
+    public void SetStressCapacity(int capacity)
+    {
+        myActionsManager.ElfData.StressCapacity = capacity;
+    }
 }

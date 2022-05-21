@@ -31,13 +31,15 @@ public class GameManager : MonoBehaviour
     //EVENTS
     public static event Action<bool> InCondition;
 
-
+    [SerializeField]
+    private ConveyorManager[] workshopConveyor;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            workshopConveyor = FindObjectsOfType<ConveyorManager>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -46,11 +48,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     private void Start()
     {
         ResetStatistics();
+        InvokeRepeating("WorkTimeScale", DifficultyManager.Instance.WorkingScale, DifficultyManager.Instance.WorkingScale);
     }
 
     private void LateUpdate()
@@ -121,6 +122,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("STRESS LOW");
             isGameOver = false;
+        }
+    }
+
+    private void WorkTimeScale()
+    {
+        Debug.Log("ESCALAR TIMPO DE TRABAJO");
+        foreach (ConveyorManager conveyor in workshopConveyor)
+        {
+            conveyor.WorkTime++;
+            conveyor.BreakTime++;
         }
     }
 }
