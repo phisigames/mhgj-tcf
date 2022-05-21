@@ -128,14 +128,14 @@ public class OtherElfIA : MonoBehaviour
         Invoke("HideCallout", myActionsManager.MyElfAnimation.AcctionDelay);
         if (myActionsManager.MyConveyor.IsInBreak)
         {
-            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Talk);
             myActionsManager.MyCalloutManager.EnableCallout(true);
             myActionsManager.ElfData.DecreaseStress(myActionsManager.TalkEmotionalDamage);
             return true;
         }
         else
         {
-            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+            myActionsManager.MyCalloutManager.SetCalloutSprite(CalloutTypes.Angry);
             myActionsManager.MyCalloutManager.EnableCallout(true);
             myActionsManager.ElfData.IncreaseStress(myActionsManager.TalkEmotionalDamage);
             return false;

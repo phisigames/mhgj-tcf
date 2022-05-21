@@ -68,7 +68,7 @@ public class ElfActionsManager : MonoBehaviour
             {
                 StressManager.IncreaseStress(wrapEmotionalDamage);
             }
-            myCalloutManager.SetCalloutSprite(CalloutTypes.Bad);
+            myCalloutManager.SetCalloutSprite(CalloutTypes.Stressed);
             myCalloutManager.EnableCallout(true);
         }
 
@@ -133,7 +133,7 @@ public class ElfActionsManager : MonoBehaviour
 
     private IEnumerator CoffeeSequence()
     {
-        myCalloutManager.SetCalloutSprite(CalloutTypes.Good);
+        myCalloutManager.SetCalloutSprite(CalloutTypes.Relaxed);
         myCalloutManager.EnableCallout(true);
         yield return new WaitForSeconds(myElfAnimation.AcctionDelay);
         StressManager.DecreaseStress(CoffeeEmotionalDamage);

@@ -47,11 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calloutRenderer: {fileID: 1261637955989347830}
   callouts:
-  - {fileID: -1051080599, guid: a477be802392a9246b144551b072e33d, type: 3}
-  - {fileID: 21300000, guid: f1181fe3e31e7f84abefe58c5a5e7608, type: 3}
-  - {fileID: 21300000, guid: 8ce369cca1044d34c916a909af78a513, type: 3}
-  - {fileID: -1535905462, guid: a477be802392a9246b144551b072e33d, type: 3}
-  - {fileID: -1606921855, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: 1009275727, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: -24673564, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: 637217902, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: -1469291870, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: -1064442704, guid: a477be802392a9246b144551b072e33d, type: 3}
+  - {fileID: 412305924, guid: a477be802392a9246b144551b072e33d, type: 3}
 --- !u!1 &2117701596921269586
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

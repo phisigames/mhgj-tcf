@@ -1,8 +1,9 @@
 public enum CalloutTypes
 {
     Talk,
-    Wrap,
-    Coffee,
+    Stressed,
+    Relaxed,
     Bad,
-    Good
+    Good,
+    Angry
 }
