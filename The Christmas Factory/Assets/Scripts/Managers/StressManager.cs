@@ -68,6 +68,11 @@ public class StressManager : MonoBehaviour
 
     private bool IsInDistress()
     {
-        return (instance.cumulativeStress > (instance.stressCapacity / 2));
+        return (instance.cumulativeStress >= (instance.stressCapacity / 2));
+    }
+
+    public bool IsMaxStressCapacity()
+    {
+        return instance.cumulativeStress == instance.stressCapacity;
     }
 }

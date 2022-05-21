@@ -97,12 +97,15 @@ public class HUD : MonoBehaviour
 
     public void GoLanding()
     {
+        GameManager.Instance.ContinueGame();
         GameManager.Instance.DestroyGameManager();
         SceneManager.LoadScene("Landing");
     }
 
     public void GoReset()
     {
+        GameManager.Instance.ResetStatistics();
+        GameManager.Instance.ContinueGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

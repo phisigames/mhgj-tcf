@@ -21,8 +21,17 @@ public class GameManager : MonoBehaviour
     private int distressHits;
     public int DistressHits { get { return distressHits; } set { distressHits = value; } }
 
+    //GAME OVER CONDITION
+    private bool isGameOver = false;
+
+    [SerializeField]
+    [Range(3, 10)]
+    private float gameOverTimeGap = 3f;
+
     //EVENTS
     public static event Action<bool> InCondition;
+
+
 
     private void Awake()
     {
@@ -41,7 +50,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ContinueGame();
         ResetStatistics();
     }
 
@@ -53,13 +61,20 @@ public class GameManager : MonoBehaviour
             PauseGame();
             InCondition?.Invoke(true);
         }
+
+        if (IsLoseCondition() && !isGameOver)
+        {
+            isGameOver = true;
+            Debug.Log("GAME OVER");
+            Invoke("GameOver", gameOverTimeGap);
+        }
     }
 
-    private void ResetStatistics()
+    public void ResetStatistics()
     {
-        cumulativeGifts = 0;
-        cumulativeLicenses = 0;
-        distressHits = 0;
+        instance.cumulativeGifts = 0;
+        instance.cumulativeLicenses = 0;
+        instance.distressHits = 0;
     }
 
     public float GetGiftCount()
@@ -72,6 +87,11 @@ public class GameManager : MonoBehaviour
         return GetGiftCount() <= 0;
     }
 
+    public bool IsLoseCondition()
+    {
+        return StressManager.Instance.IsMaxStressCapacity();
+    }
+
     private void PauseGame()
     {
         Time.timeScale = 0;
@@ -79,7 +99,7 @@ public class GameManager : MonoBehaviour
         //Disable scripts that still work while timescale is set to 0
     }
 
-    private void ContinueGame()
+    public void ContinueGame()
     {
         Time.timeScale = 1;
         //pausePanel.SetActive(false);
@@ -89,5 +109,20 @@ public class GameManager : MonoBehaviour
     public void DestroyGameManager()
     {
         Destroy(gameObject);
+    }
+
+    private void GameOver()
+    {
+        if (IsLoseCondition())
+        {
+            Debug.Log("LOSE");
+            PauseGame();
+            InCondition?.Invoke(false);
+        }
+        else
+        {
+            Debug.Log("STRESS LOW");
+            isGameOver = false;
+        }
     }
 }
