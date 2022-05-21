@@ -36,8 +36,19 @@ public class HUD : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+
+    private void OnEnable()
+    {
         StressManager.OnChangeStress += UpdateStressBar;
         GameManager.InCondition += OpenStatusPanel;
+    }
+
+    private void Start()
+    {
+        stressBar.value = StressManager.Instance.CumulativeStress;
+        stressBar.maxValue = StressManager.Instance.StressCapacity;
     }
 
     private void Update()
@@ -48,14 +59,8 @@ public class HUD : MonoBehaviour
             Debug.Log("PANEL STATUS");
             UpdateStatistics();
             statusPanel.SetActive(!statusPanel.activeSelf);
-            
-        }
-    }
 
-    private void Start()
-    {
-        stressBar.value = StressManager.Instance.CumulativeStress;
-        stressBar.maxValue = StressManager.Instance.StressCapacity;
+        }
     }
 
     public void UpdateStressBar()
@@ -94,9 +99,15 @@ public class HUD : MonoBehaviour
 
     private void UpdateStatistics()
     {
-        statusGiftValue.text = "x"+GameManager.Instance.CumulativeGifts.ToString();
-        statusLicenseValue.text = "x"+GameManager.Instance.CumulativeLicenses.ToString();
-        statusDistressValue.text = "x"+GameManager.Instance.DistressHits.ToString();
+        statusGiftValue.text = "x" + GameManager.Instance.CumulativeGifts.ToString();
+        statusLicenseValue.text = "x" + GameManager.Instance.CumulativeLicenses.ToString();
+        statusDistressValue.text = "x" + GameManager.Instance.DistressHits.ToString();
+    }
+
+    private void OnDisable()
+    {
+        StressManager.OnChangeStress -= UpdateStressBar;
+        GameManager.InCondition -= OpenStatusPanel;
     }
 
 }

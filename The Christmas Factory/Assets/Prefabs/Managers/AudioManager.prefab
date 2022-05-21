@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalPitch: 0.02
-  pitchDecrease: 0.05
-  myAudioSource: {fileID: 0}
+  maximalPitch: 1
+  pitchFactor: 0.05
+  myAudioSource: {fileID: 5796047207503046335}
 --- !u!82 &5796047207503046335
 AudioSource:
   m_ObjectHideFlags: 0

@@ -30,14 +30,17 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            myAudioSource = GetComponent<AudioSource>();
-            StressManager.InDistress += DecreasePitch;
-            StressManager.InStress   += IncreasePitch;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        StressManager.InDistress += DecreasePitch;
+        StressManager.InStress += IncreasePitch;
     }
 
     public void DecreasePitch()
@@ -54,5 +57,10 @@ public class AudioManager : MonoBehaviour
         {
             myAudioSource.pitch += pitchFactor;
         }
+    }
+
+    private void OnDisable() {
+        StressManager.InDistress -= DecreasePitch;
+        StressManager.InStress -= IncreasePitch;
     }
 }
