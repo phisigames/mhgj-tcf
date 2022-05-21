@@ -53,8 +53,9 @@ public class GameManager : MonoBehaviour
         ResetStatistics();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        Debug.Log("LATE UPDATE");
         if (IsWinCondition())
         {
             Debug.Log("WIN");
@@ -65,8 +66,8 @@ public class GameManager : MonoBehaviour
         if (IsLoseCondition() && !isGameOver)
         {
             isGameOver = true;
-            Debug.Log("GAME OVER");
-            Invoke("GameOver", gameOverTimeGap);
+            Debug.Log("GAME OVER Coroutine");
+            StartCoroutine(GameOver());
         }
     }
 
@@ -95,15 +96,11 @@ public class GameManager : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0;
-        //pausePanel.SetActive(true);
-        //Disable scripts that still work while timescale is set to 0
     }
 
     public void ContinueGame()
     {
         Time.timeScale = 1;
-        //pausePanel.SetActive(false);
-        //enable the scripts again
     }
 
     public void DestroyGameManager()
@@ -111,13 +108,14 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void GameOver()
+    private IEnumerator GameOver()
     {
+        yield return new WaitForSeconds(gameOverTimeGap);
         if (IsLoseCondition())
         {
             Debug.Log("LOSE");
-            PauseGame();
             InCondition?.Invoke(false);
+            PauseGame();
         }
         else
         {

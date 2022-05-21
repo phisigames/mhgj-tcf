@@ -28,6 +28,7 @@ public class StressManager : MonoBehaviour
         {
             instance = this;
             cumulativeStress = 0;
+            stressCapacity = (int) DifficultyManager.Instance.StressPlayer;
         }
         else
         {
