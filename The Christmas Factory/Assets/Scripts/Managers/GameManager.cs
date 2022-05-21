@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -19,19 +21,73 @@ public class GameManager : MonoBehaviour
     private int distressHits;
     public int DistressHits { get { return distressHits; } set { distressHits = value; } }
 
+    //EVENTS
+    public static event Action<bool> InCondition;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            cumulativeGifts = 0;
-            cumulativeLicenses = 0;
-            distressHits = 0;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+
+
+    private void Start()
+    {
+        ContinueGame();
+        ResetStatistics();
+    }
+
+    private void Update()
+    {
+        if (IsWinCondition())
+        {
+            Debug.Log("WIN");
+            PauseGame();
+            InCondition?.Invoke(true);
+        }
+    }
+
+    private void ResetStatistics()
+    {
+        cumulativeGifts = 0;
+        cumulativeLicenses = 0;
+        distressHits = 0;
+    }
+
+    public float GetGiftCount()
+    {
+        return DifficultyManager.Instance.GoalGift - cumulativeGifts;
+    }
+
+    public bool IsWinCondition()
+    {
+        return GetGiftCount() <= 0;
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        //pausePanel.SetActive(true);
+        //Disable scripts that still work while timescale is set to 0
+    }
+
+    private void ContinueGame()
+    {
+        Time.timeScale = 1;
+        //pausePanel.SetActive(false);
+        //enable the scripts again
+    }
+
+    public void DestroyGameManager()
+    {
+        Destroy(gameObject);
     }
 }
