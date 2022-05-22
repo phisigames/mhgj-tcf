@@ -73,4 +73,9 @@ public class ElfAnimationController : MonoBehaviour
         SlideIdle();
         inAction = false;
     }
+
+    public void FlipStatus(bool status)
+    {
+        myRenderer.flipX = status;
+    }
 }

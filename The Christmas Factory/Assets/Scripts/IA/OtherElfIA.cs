@@ -93,6 +93,9 @@ public class OtherElfIA : MonoBehaviour
 
     private IEnumerator LicenseBehaviour()
     {
+        myActionsManager.MyConveyor.SingboardEnable(true);
+        yield return new WaitForSeconds(1f);
+        myActionsManager.MyElfAnimation.SlideIdle();
         for (int i = 0; i < pathLicense.Count; i++)
         {
             Vector3 startPosition = transform.position;
@@ -103,28 +106,30 @@ public class OtherElfIA : MonoBehaviour
             float travelPercent = 0f;
             while (travelPercent < 1f)
             {
-                travelPercent += Time.deltaTime * 0.7f;
+                travelPercent += Time.deltaTime * myActionsManager.ElfData.WalkSpeed;
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame();
             }
 
             myActionsManager.MyElfAnimation.WalkingAnimator(false);
             myActionsManager.MyElfAnimation.FrontIdle();
-
-            if ((i + 1) <= path.Count)
+            //SI LLEGUE AL PRIMER PUNTO
+            if ( i == 0)
             {
                 yield return new WaitForSeconds(licenseTime);
             }
         }
-
+        yield return new WaitForSeconds(1f);
         myActionsManager.ElfData.CumulativeStress = 0;
         isInLicense = false;
         isWorking = true;
+        myActionsManager.MyConveyor.SingboardEnable(false);
         myActionsManager.MyConveyor.TerminalOn();
     }
 
     public bool ElfResponse()
     {
+        myActionsManager.MyElfAnimation.FlipStatus(false);
         myActionsManager.MyElfAnimation.AcctionAnimation("Talk");
         Invoke("HideCallout", myActionsManager.MyElfAnimation.AcctionDelay);
         if (myActionsManager.MyConveyor.IsInBreak)

@@ -54,6 +54,9 @@ public class ConveyorManager : MonoBehaviour
     private bool isInBreak = false;
     public bool IsInBreak { get { return isInBreak; } set { isInBreak = value; } }
 
+    [SerializeField]
+    private GameObject singboard;
+
     private void Awake()
     {
         myToySpawner = GetComponent<ToySpawner>();
@@ -141,5 +144,10 @@ public class ConveyorManager : MonoBehaviour
     {
         myRell.speed = speed;
         myRell.speedVariation = speedVarition;
+    }
+
+    public void SingboardEnable(bool status)
+    {
+        singboard.SetActive(status);
     }
 }
