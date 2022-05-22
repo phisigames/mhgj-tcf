@@ -335,11 +335,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: workTime
-      value: 14
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: breakTime
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: speedReel
@@ -946,6 +946,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5925528816935389886, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
+      propertyPath: emotionalDamage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: workTime
       value: 10
@@ -1061,12 +1065,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6628618080027452547, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
       propertyPath: cumulativeStress
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7643335156430747554, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
       propertyPath: myConveyor
       value: 
       objectReference: {fileID: 1586249850}
+    - target: {fileID: 7643335156430747554, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
+      propertyPath: wrapEmotionalDamage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9165770396719621881, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
       propertyPath: m_Name
       value: Elf B
@@ -1438,11 +1446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: workTime
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: breakTime
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6526854631138288384, guid: 01d4cac43ac6c5a438762c56e2f1c925, type: 3}
       propertyPath: speedReel
@@ -1585,8 +1593,16 @@ PrefabInstance:
       value: Supervisor
       objectReference: {fileID: 0}
     - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
+      propertyPath: emotionalDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: path.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
+      propertyPath: delayBetweenRounds
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: path.Array.data[0]
@@ -1598,7 +1614,7 @@ PrefabInstance:
       objectReference: {fileID: 1552768323}
     - target: {fileID: 4409552948827920695, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: goodOrdenProbability
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4573404249678564434, guid: 029928c555178dc439e3cfde30d790dd, type: 3}
       propertyPath: m_RootOrder
@@ -1922,6 +1938,10 @@ PrefabInstance:
       propertyPath: myConveyor
       value: 
       objectReference: {fileID: 2027303720}
+    - target: {fileID: 7643335156430747554, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
+      propertyPath: wrapEmotionalDamage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9165770396719621881, guid: c848b70b32a33734b905ee1b7bb26512, type: 3}
       propertyPath: m_Name
       value: Elf C
@@ -2268,6 +2288,14 @@ PrefabInstance:
       propertyPath: myConveyor
       value: 
       objectReference: {fileID: 146573947}
+    - target: {fileID: 1891499248967173775, guid: 9f23c27936bcbf841b328f45dd756443, type: 3}
+      propertyPath: talkEmotionalDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891499248967173775, guid: 9f23c27936bcbf841b328f45dd756443, type: 3}
+      propertyPath: wrapEmotionalDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4267814321855832728, guid: 9f23c27936bcbf841b328f45dd756443, type: 3}
       propertyPath: walkSpeed
       value: 8
@@ -2335,7 +2363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: pitchFactor
-      value: 0.05
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5796047207503046320, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: minimalPitch
@@ -2399,7 +2427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5796047207503046335, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: m_Volume
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5796047207503046335, guid: 7b278f7ae1981b0408fae2a4bfa9faf6, type: 3}
       propertyPath: m_audioClip

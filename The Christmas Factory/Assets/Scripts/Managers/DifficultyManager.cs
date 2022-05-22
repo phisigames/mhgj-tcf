@@ -32,7 +32,7 @@ public class DifficultyManager : MonoBehaviour
             goalGift = 100;
             stressPlayer = 20;
             stressNPC = 16;
-            workingScale = 40;
+            workingScale = 20;
         }
         else
         {
